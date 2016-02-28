@@ -1,0 +1,13 @@
+{
+  "name": "customelements-dart",
+  "version": "0.0.1",
+  "homepage": "https://github.com/d4m0vm3nt/custom-elements",
+  "authors": [
+    "Vittorio Ballestra <d4m0vment@github.org>"
+  ],
+  "private": true,
+  "dependencies": {
+    "paper-datatable": "paper-datatable#master",
+    "iron-data-table" : "iron-data-table#v1.0.0-alpha3"
+  }
+}

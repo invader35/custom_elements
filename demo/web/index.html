@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO POLYMER AUTONOTIFY</title>
+
+
+      <!--
+      Necessario perchè il renderer degli hints viene aggiunto al body
+      e se non lo importiamo qua non vede gli stili e non si vedono  gli hints.
+      -->
+
+      <script src="packages/web_components/webcomponents-lite.min.js"></script>
+
+  </head>
+  <body class="fullbleed" unresolved >
+
+
+    <test-custom-elements style="position: absolute;left:0;top:0;bottom:0;right:0"></test-custom-elements>
+
+    <script type="application/dart" src="index.dart"></script>
+    <script src="packages/browser/dart.js"></script>
+
+  </body>
+</html>

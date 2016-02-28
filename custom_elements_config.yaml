@@ -1,0 +1,31 @@
+# Configuration for running tool/generate_dart_api.dart
+files_to_generate:
+#  - paper-datatable/paper-datatable.html
+#  - paper-datatable/paper-datatable-column.html
+#  - paper-datatable/paper-datatable-edit-dialog.html
+#  - paper-datatable/datatable-icons.html
+  - iron-data-table/data-table-cell.html	  
+  - iron-data-table/data-table-column-filter.html  
+  - iron-data-table/data-table-column-sort.html  
+  - iron-data-table/data-table-checkbox.html  
+  - iron-data-table/data-table-column.html	 
+  - iron-data-table/default-styles.html	      
+  - iron-data-table/iron-data-table.html
+
+files_to_load:
+  - package:polymer_interop/src/js/debug/src/lib/template/templatizer.html
+  - package:polymer_elements/src/iron-resizable-behavior/iron-resizable-behavior.html
+  - package:polymer_elements/src/paper-checkbox/paper-checkbox.html
+  - package:polymer_elements/src/paper-tooltip/paper-tooltip.html
+#deletion_patterns:
+#  - metadata\.html$
+#  - index\.html$
+#  - demo\.html$
+#  - demos$
+#  - demo$
+#  - README\.md$
+#  - ^polymer$
+#  - ^webcomponentsjs$
+#  - .gitignore$
+#  - .travis.yml$
+#  - CONTRIBUTING\.md$

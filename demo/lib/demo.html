@@ -1,0 +1,41 @@
+<dom-module id="test-custom-elements">
+    <template>
+        <style>
+            .fit {
+                position: absolute;
+                left:0;
+                top:0;
+                bottom:0;
+                right:0;
+            }
+
+            :host {
+                @apply(--layout-vertical);
+            }
+
+            .tbl {
+                @apply(--layout-flex);
+            }
+
+            h1 {
+                @apply(--layout-self-center);
+            }
+
+        </style>
+        <style include="iron-data-table-style"></style>
+        <h1> hello </h1>
+
+        <iron-data-table class="tbl" items="{{myData}}" selection-enabled>
+            <data-table-column name="Page" sort-by="page" width="50px" flex="0">
+                <template>
+                    <span>[[item.page]]</span>
+                </template>
+            </data-table-column>
+            <data-table-column name="Title" sort-by="title" flex="1">
+                <template>[[item.title]]</template>
+            </data-table-column>
+        </iron-data-table>
+
+
+    </template>
+</dom-module>
