@@ -1,5 +1,5 @@
 name: custom_elements
-version: 0.0.1
+version: 0.0.2
 author: community <info@customelements.io>
 description: Custom Elements from Community ported to dart
 homepage: https://github.com/dart-lang/polymer_elements

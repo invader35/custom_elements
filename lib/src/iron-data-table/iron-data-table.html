@@ -15,9 +15,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<link rel="import" href="packages/polymer/polymer.html">
-<link rel="import" href="packages/polymer_elements/iron_list.html">
-<link rel="import" href="packages/polymer_elements/iron_resizable_behavior.html">
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/polymer_elements/iron_list.html">
+<link rel="import" href="../../../../packages/polymer_elements/iron_resizable_behavior.html">
 
 <link rel="import" href="data-table-column.html">
 <link rel="import" href="data-table-column-sort.html">
@@ -511,22 +511,34 @@ inspired styles to your `iron-data-table`.
           return;
         }
 
-        return Array.prototype.filter.call(items.base, function(item, index) {
-          for (var i = 0; i < filter.base.length; i++) {
-            var value = this.get(filter.base[i].path, item);
+        if (items.base==null) {
+          return null;
+        }
 
-            if (value.toLowerCase().indexOf(filter.base[i].filter.toLowerCase()) === -1) {
-              return false;
+
+        try {
+          return Array.prototype.filter.call(items.base, function (item, index) {
+            for (var i = 0; i < filter.base.length; i++) {
+              var value = this.get(filter.base[i].path, item);
+
+              if (value.toLowerCase().indexOf(filter.base[i].filter.toLowerCase()) === -1) {
+                return false;
+              }
             }
-          }
 
-          return true;
-        }.bind(this));
+            return true;
+          }.bind(this));
+        } catch (error) {
+
+        }
       },
 
       _sort: function(items, sortOrder, groupBy) {
         // TODO: need to fire some notifications, because sorting happens in place.
         this.notifyPath('_sortedItems', undefined);
+        if (items==null) {
+          return null;
+        }
 
         return Array.prototype.sort.call(items, function(a, b) {
           var groupOrder = groupBy ? this._compare(this.get(groupBy, a), this.get(groupBy, b)) : 0;
