@@ -42,7 +42,6 @@ files_to_load:
 #  - package:polymer_elements/src/paper-checkbox/paper-checkbox.html
 #  - package:polymer_elements/src/paper-tooltip/paper-tooltip.html
 deletion_patterns:
-# - ^iron-list
  - ^iron-ajax
  - ^font-roboto
  - ^iron-a11y
@@ -51,15 +50,12 @@ deletion_patterns:
  - ^iron-check
  - ^iron-flex
  - ^iron-form
-# - ^iron-icon
  - ^iron-inp
  - ^iron-met
-# - ^iron-res
  - ^iron-scr
  - ^iron-sel
  - ^iron-val
  - ^neon
-#- ^polymer
  - ^promise
  - ^web
  - ^paper-behaviors
@@ -67,4 +63,12 @@ deletion_patterns:
  - ^paper-item
  - ^paper-material
  - ^paper-styles
-# - ^paper-
+ - metadata\.html$
+ - index\.html$
+ - demo\.html$
+ - demos$
+ - demo$
+ - README\.md$
+ - .gitignore$
+ - .travis.yml$
+ - CONTRIBUTING\.md$
