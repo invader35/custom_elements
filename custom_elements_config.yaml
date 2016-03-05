@@ -72,3 +72,20 @@ deletion_patterns:
  - .gitignore$
  - .travis.yml$
  - CONTRIBUTING\.md$
+ - test
+ - iron-icons/av-icons.html
+ - iron-icons/communication-icons.html
+ - iron-icons/device-icons.html
+ - iron-icons/editor-icons.html
+ - iron-icons/hardware-icons.html
+ - iron-icons/hero.svg
+ - iron-icons/image-icons.html
+ - iron-icons/maps-icons.html
+ - iron-icons/notification-icons.html
+ - iron-icons/places-icons.html
+ - iron-icons/social-icons.html
+ - iron-iconset-svg
+ - paper-input/paper-input-.*.html
+ - paper-input/paper-textarea.html
+ - paper-input/all-imports.html
+ - polymer/polymer-*.html
