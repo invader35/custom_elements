@@ -25,13 +25,13 @@
         <style include="iron-data-table-style"></style>
         <h1> hello </h1>
 
-        <iron-data-table class="tbl" items="{{myData}}" selection-enabled>
+        <iron-data-table class="tbl" items="{{myData}}" selection-enabled multi-selection>
             <data-table-column name="Page" sort-by="page" width="50px" flex="0">
                 <template>
                     <span>[[item.page]]</span>
                 </template>
             </data-table-column>
-            <data-table-column name="Title" sort-by="title" flex="1">
+            <data-table-column name="Title" sort-by="title" flex="1" filter-by="title">
                 <template>[[item.title]]</template>
             </data-table-column>
         </iron-data-table>

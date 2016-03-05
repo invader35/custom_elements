@@ -1,31 +1,70 @@
+package_mappings:
+  - iron-: polymer_elements
+  - paper-: polymer_elements
+  # For mixin classes
+  - Iron: polymer_elements
+  - Paper: polymer_elements
 # Configuration for running tool/generate_dart_api.dart
 files_to_generate:
 #  - paper-datatable/paper-datatable.html
 #  - paper-datatable/paper-datatable-column.html
 #  - paper-datatable/paper-datatable-edit-dialog.html
 #  - paper-datatable/datatable-icons.html
-  - iron-data-table/data-table-cell.html	  
+  - iron-data-table/data-table-cell.html
   - iron-data-table/data-table-column-filter.html  
   - iron-data-table/data-table-column-sort.html  
   - iron-data-table/data-table-checkbox.html  
-  - iron-data-table/data-table-column.html	 
+  - iron-data-table/data-table-column.html:
+     omit_imports:
+        - templatizer.html
   - iron-data-table/default-styles.html	      
-  - iron-data-table/iron-data-table.html
-
+  - iron-data-table/iron-data-table.html:
+     omit_imports:
+      - src/iron-resizable-behavior
+     extra_imports:
+      - package:polymer_elements/iron_resizable_behavior.dart
+stubs_to_generate:
+ polymer_elements:
+  - paper-checkbox/paper-checkbox.html
+  - paper-tooltip/paper-tooltip.html
+  - iron-resizable-behavior/iron-resizable-behavior.html
+  - iron-list/iron-list.html
+  - paper-input/paper-input.html
+  - iron-icon/iron-icon.html
+  - iron-icons/iron-icons.html
+  - paper-ripple/paper-ripple.html
+ polymer:
+  - polymer/polymer.html
 files_to_load:
   - package:polymer_interop/src/js/debug/src/lib/template/templatizer.html
   - package:polymer_elements/src/iron-resizable-behavior/iron-resizable-behavior.html
-  - package:polymer_elements/src/paper-checkbox/paper-checkbox.html
-  - package:polymer_elements/src/paper-tooltip/paper-tooltip.html
-#deletion_patterns:
-#  - metadata\.html$
-#  - index\.html$
-#  - demo\.html$
-#  - demos$
-#  - demo$
-#  - README\.md$
-#  - ^polymer$
-#  - ^webcomponentsjs$
-#  - .gitignore$
-#  - .travis.yml$
-#  - CONTRIBUTING\.md$
+#  - package:polymer_elements/src/iron-list/iron-list.html
+#  - package:polymer_elements/src/paper-checkbox/paper-checkbox.html
+#  - package:polymer_elements/src/paper-tooltip/paper-tooltip.html
+deletion_patterns:
+# - ^iron-list
+ - ^iron-ajax
+ - ^font-roboto
+ - ^iron-a11y
+ - ^iron-auto
+ - ^iron-beha
+ - ^iron-check
+ - ^iron-flex
+ - ^iron-form
+# - ^iron-icon
+ - ^iron-inp
+ - ^iron-met
+# - ^iron-res
+ - ^iron-scr
+ - ^iron-sel
+ - ^iron-val
+ - ^neon
+#- ^polymer
+ - ^promise
+ - ^web
+ - ^paper-behaviors
+ - ^paper-icon-button
+ - ^paper-item
+ - ^paper-material
+ - ^paper-styles
+# - ^paper-

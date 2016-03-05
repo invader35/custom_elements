@@ -7,7 +7,7 @@ import "package:polymer_elements/iron_flex_layout.dart";
 import "package:custom_elements/iron_data_table.dart";
 import "package:custom_elements/data_table_column.dart";
 import "package:custom_elements/data_table_column_sort.dart";
-import "package:custom_elements/default_styles.dart";
+import "package:custom_elements/iron_data_table_style.dart";
 
 class Item extends JsProxy {
   @reflectable String page;

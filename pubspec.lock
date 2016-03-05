@@ -75,9 +75,10 @@ packages:
     version: "0.12.2"
   custom_element_apigen:
     description:
-      name: custom_element_apigen
-      url: "http://pub.drafintech.it:5001"
-    source: hosted
+      ref: HEAD
+      resolved-ref: "47d85a52e7b4ab6ab8728741ec5f5dc917b8f64c"
+      url: "git@github.com:dam0vm3nt/custom-element-apigen.git"
+    source: git
     version: "0.2.1+1"
   dart_style:
     description:
