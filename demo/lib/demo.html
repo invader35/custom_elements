@@ -21,9 +21,14 @@
                 @apply(--layout-self-center);
             }
 
+            .red-chip {
+                --paper-chip-background-color: red;
+            }
+
         </style>
         <style include="iron-data-table-style"></style>
         <style include="paper-date-picker-dialog-style"></style>
+        <style include="paper-time-picker-dialog-style"></style>
 
         <h1> hello </h1>
 
@@ -49,6 +54,7 @@
         </paper-datatable>
 
         -->
+        <div>
         <paper-button on-tap="showDatePicker">date picker</paper-button>
         <paper-dialog opened="{{datePickerDialogOpened}}" id="dlg1" class="paper-date-picker-dialog" modal >
             <h2>Date picker</h2>
@@ -59,6 +65,27 @@
             </div>
         </paper-dialog>
 
+        <paper-button on-tap="showTimePicker">time picker</paper-button>
+        <paper-dialog opened="{{timePickerDialogOpened}}" id="dlg2" class="paper-time-picker-dialog" modal >
+            <h2>Date picker</h2>
+            <paper-time-picker></paper-time-picker>
+            <div class="buttons">
+                <paper-button dialog-confirm>ok</paper-button>
+                <paper-button dialog-dismiss>cancel</paper-button>
+            </div>
+        </paper-dialog>
+
+        <paper-chip removable class="red-chip">
+            <iron-icon class="icon" icon="icons:add"></iron-icon>
+            <h1>John Doe</h1>
+            <h2>jdoe@example.com</h2>
+        </paper-chip>
+
+        <paper-chip label="Jane Doe">
+            <div class="icon">J</div>
+            <h1>jdoe@example.com</h1>
+        </paper-chip>
+        </div>
 
     </template>
 </dom-module>

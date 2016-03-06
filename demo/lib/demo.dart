@@ -13,6 +13,9 @@ import "package:custom_elements/paper_datatable.dart";
 import "package:custom_elements/paper_datatable_column.dart";
 */
 import "package:custom_elements/paper_date_picker.dart";
+import "package:custom_elements/paper_time_picker.dart";
+import "package:custom_elements/paper_date_picker_dialog_style.dart";
+import "package:custom_elements/paper_chip.dart";
 import "package:polymer_elements/paper_button.dart";
 import "package:polymer_elements/paper_dialog.dart";
 import "package:custom_elements/paper_date_picker_dialog_style.dart";
@@ -37,11 +40,19 @@ class TestPolymerAutonotify extends PolymerElement {
   @Property(notify: true) bool datePickerDialogOpened = false;
 
   PaperDialog get dlg1 => $["dlg1"];
+  PaperDialog get dlg2 => $["dlg2"];
+
 
   @reflectable
   void showDatePicker([_,__]) {
     set("datePickerDialogOpenend",true);
     dlg1.opened = true;
+  }
+
+  @reflectable
+  void showTimePicker([_,__]) {
+    set("timePickerDialogOpenend",true);
+    dlg2.opened = true;
   }
 
   void attached() {

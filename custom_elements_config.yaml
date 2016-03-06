@@ -2,6 +2,8 @@ package_mappings:
   - paper-datatable: custom_elements
   - paper-calendar: custom_elements
   - paper-date: custom_elements
+  - paper-clock: custom_elements
+  - paper-time: custom_elements
   - iron-: polymer_elements
   - neon-: polymer_elements
   - paper-: polymer_elements
@@ -10,6 +12,29 @@ package_mappings:
   - Paper: polymer_elements
 # Configuration for running tool/generate_dart_api.dart
 files_to_generate:
+  - paper-time-picker/paper-time-picker.html:
+     omit_imports:
+      - src/iron-resizable-behavior
+      - fade-in-animation.html
+      - fade-out-animation.html
+     extra_imports:
+      - package:polymer_elements/iron_resizable_behavior.dart
+      - package:polymer_elements/neon_animation/animations/fade_in_animation.dart
+      - package:polymer_elements/neon_animation/animations/fade_out_animation.dart
+  - paper-time-picker/paper-clock-selector.html:
+      omit_imports:
+       - src/iron-resizable-behavior
+      extra_imports:
+       - package:polymer_elements/iron_resizable_behavior.dart
+  - paper-time-picker/paper-time-picker-dialog-style.html
+  - paper-chip/paper-chip.html:
+     omit_imports:
+      - iron-behaviors
+      - iron-a11y-keys-behavior.html
+     extra_imports:
+      - package:polymer_elements/iron_button_state.dart
+      - package:polymer_elements/iron_a11y_keys_behavior.dart
+      - package:polymer_elements/iron_control_state.dart
   - moment-element/moment-with-locales-import.html
   - polymer-paper-date-picker/paper-date-picker.html:
      omit_imports:
@@ -87,6 +112,9 @@ stubs_to_generate:
 files_to_load:
   - package:polymer_interop/src/js/debug/src/lib/template/templatizer.html
   - package:polymer_elements/src/iron-resizable-behavior/iron-resizable-behavior.html
+  - package:polymer_elements/src/iron-behaviors/iron-button-state.html
+  - package:polymer_elements/src/iron-behaviors/iron-control-state.html
+  - package:polymer_elements/src/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html
 #  - package:polymer_elements/src/iron-list/iron-list.html
 #  - package:polymer_elements/src/paper-checkbox/paper-checkbox.html
 #  - package:polymer_elements/src/paper-tooltip/paper-tooltip.html
