@@ -1,15 +1,48 @@
 package_mappings:
+  - paper-datatable: custom_elements
+  - paper-calendar: custom_elements
+  - paper-date: custom_elements
   - iron-: polymer_elements
+  - neon-: polymer_elements
   - paper-: polymer_elements
   # For mixin classes
   - Iron: polymer_elements
   - Paper: polymer_elements
 # Configuration for running tool/generate_dart_api.dart
 files_to_generate:
-#  - paper-datatable/paper-datatable.html
-#  - paper-datatable/paper-datatable-column.html
-#  - paper-datatable/paper-datatable-edit-dialog.html
-#  - paper-datatable/datatable-icons.html
+  - moment-element/moment-with-locales-import.html
+  - polymer-paper-date-picker/paper-date-picker.html:
+     omit_imports:
+      - src/iron-resizable-behavior
+      - fade-in-animation.html
+      - fade-out-animation.html
+     extra_imports:
+      - package:polymer_elements/iron_resizable_behavior.dart
+      - package:polymer_elements/neon_animation/animations/fade_in_animation.dart
+      - package:polymer_elements/neon_animation/animations/fade_out_animation.dart
+  - polymer-paper-date-picker/paper-calendar.html:
+      omit_imports:
+       - src/iron-resizable-behavior
+      extra_imports:
+       - package:polymer_elements/iron_resizable_behavior.dart
+  - polymer-paper-date-picker/paper-date-picker-dialog-style.html
+
+  - paper-datatable/paper-datatable.html:
+     omit_imports:
+      - src/iron-resizable-behavior
+     extra_imports:
+      - package:polymer_elements/iron_resizable_behavior.dart
+  - paper-datatable/paper-datatable-column.html:
+      omit_imports:
+         - templatizer.html
+      name_substitutions:
+        default: defaultValue
+  - paper-datatable/paper-datatable-edit-dialog.html:
+     omit_imports:
+      - src/iron-resizable-behavior
+     extra_imports:
+      - package:polymer_elements/iron_resizable_behavior.dart
+  - paper-datatable/datatable-icons.html
   - iron-data-table/data-table-cell.html
   - iron-data-table/data-table-column-filter.html  
   - iron-data-table/data-table-column-sort.html  
@@ -33,6 +66,22 @@ stubs_to_generate:
   - iron-icon/iron-icon.html
   - iron-icons/iron-icons.html
   - paper-ripple/paper-ripple.html
+  - paper-material/paper-material.html
+#  - paper-dropdown-menu/paper-dropdown-menu.html
+#  - paper-menu/paper-menu.html
+  - paper-item/paper-item.html
+  - paper-icon-button/paper-icon-button.html
+#  - paper-progress/paper-progress.html
+  - paper-styles/paper-styles.html
+  - iron-form/iron-form.html
+  - font-roboto/roboto.html
+  - neon-animation/neon-animatable.html
+  - neon-animation/animations/fade-in-animation.html
+  - neon-animation/animations/fade-out-animation.html
+  - iron-media-query/iron-media-query.html
+  - neon-animation/neon-animated-pages.html
+  - iron-selector/iron-selector.html
+  - iron-flex-layout/iron-flex-layout.html
  polymer:
   - polymer/polymer.html
 files_to_load:
@@ -53,16 +102,10 @@ deletion_patterns:
  - ^iron-inp
  - ^iron-met
  - ^iron-scr
- - ^iron-sel
  - ^iron-val
- - ^neon
  - ^promise
  - ^web
  - ^paper-behaviors
- - ^paper-icon-button
- - ^paper-item
- - ^paper-material
- - ^paper-styles
  - metadata\.html$
  - index\.html$
  - demo\.html$
