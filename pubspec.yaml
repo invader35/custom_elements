@@ -1,8 +1,8 @@
 name: custom_elements
-version: 0.0.3
-author: community <info@customelements.io>
+version: 0.0.3+1
+author: Vittorio Ballestra <vittorio.ballestra@drafintech.it>
 description: Custom Elements from Community ported to dart
-homepage: https://github.com/dart-lang/polymer_elements
+homepage: https://www.drafintech.it
 dependencies:
   polymer_interop: ^1.0.0-rc.5
   web_components: ^0.12.0
@@ -17,23 +17,12 @@ dev_dependencies:
   test: ^0.12.5+1
   yaml: ">=1.0.0 <3.0.0"
 
-dependency_overrides:
- custom_element_apigen:
-  git: git@github.com:dam0vm3nt/custom-element-apigen.git
+# NOTE : Need to uncomment this to run the correct upgrade
+#dependency_overrides:
+# custom_element_apigen:
+#  git: git@github.com:dam0vm3nt/custom-element-apigen.git
 #  path: ../custom-element-apigen
 
-#transformers:
-#- web_components:
-#    $include: test/*_test.html
-#- reflectable:
-#    $include: test/*_test.dart
-#    entry_points:
-#    - test/iron_a11y_keys_behavior_test.dart
-#    - test/iron_behavior_active_state_test.dart
-#    - test/iron_behavior_disabled_state_test.dart
-#    - test/iron_behavior_focused_state_test.dart
-#- test/pub_serve:
-#    $include: test/**_test{.*,}.dart
 
 environment:
   sdk: ">=1.8.0 <2.0.0"
