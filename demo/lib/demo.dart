@@ -42,6 +42,9 @@ class TestPolymerAutonotify extends PolymerElement {
   PaperDialog get dlg1 => $["dlg1"];
   PaperDialog get dlg2 => $["dlg2"];
 
+  @property var currentDate=new DateTime.now();
+  @property var currentTime="11:44 PM";
+
 
   @reflectable
   void showDatePicker([_,__]) {
