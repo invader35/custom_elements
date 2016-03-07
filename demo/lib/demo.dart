@@ -19,6 +19,7 @@ import "package:custom_elements/paper_chip.dart";
 import "package:polymer_elements/paper_button.dart";
 import "package:polymer_elements/paper_dialog.dart";
 import "package:custom_elements/paper_date_picker_dialog_style.dart";
+import "package:custom_elements/paper_divider.dart";
 
 
 class Item extends JsProxy {
