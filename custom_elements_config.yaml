@@ -12,6 +12,7 @@ package_mappings:
   - Paper: polymer_elements
 # Configuration for running tool/generate_dart_api.dart
 files_to_generate:
+  - paper-divider/paper-divider.html
   - paper-time-picker/paper-time-picker.html:
      omit_imports:
       - src/iron-resizable-behavior

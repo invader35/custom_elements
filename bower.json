@@ -11,6 +11,7 @@
     "iron-data-table" : "iron-data-table#v1.0.0-alpha3",
     "polymer-paper-date-picker": "*",
     "paper-time-picker": "*",
-    "paper-chip":"*"
+    "paper-chip":"*",
+    "paper-divider":"*"
   }
 }
