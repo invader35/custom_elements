@@ -4,6 +4,7 @@ A Dart port of selected elements from [customelements.io](https://customelements
 
 ## Ported Elements
 
+ - [paper-divider](https://customelements.io/WebPaperElements/paper-divider/)
  - [paper-chip](https://customelements.io/bendavis78/paper-chip/)
  - [paper-date-picker](https://customelements.io/bendavis78/paper-date-picker/)
  - [paper-time-picker](https://customelements.io/bendavis78/paper-time-picker/)
