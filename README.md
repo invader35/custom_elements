@@ -2,6 +2,8 @@
 
 A Dart port of selected elements from [customelements.io](https://customelements.io).
 
+Also some styles from [polymerthemes.com](https://polymerthemes.com)
+
 ## Ported Elements
 
  - [paper-divider](https://customelements.io/WebPaperElements/paper-divider/)
