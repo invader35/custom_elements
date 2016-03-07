@@ -1,5 +1,5 @@
 name: custom_elements
-version: 0.0.5
+version: 0.0.5+1
 author: Vittorio Ballestra <vittorio.ballestra@drafintech.it>
 description: Custom Elements from Community ported to dart
 homepage: https://www.drafintech.it
