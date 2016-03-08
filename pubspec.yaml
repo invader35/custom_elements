@@ -17,12 +17,5 @@ dev_dependencies:
   test: ^0.12.5+1
   yaml: ">=1.0.0 <3.0.0"
 
-# NOTE : Need to uncomment this to run the correct upgrade
-#dependency_overrides:
-# custom_element_apigen:
-#  git: git@github.com:dam0vm3nt/custom-element-apigen.git
-#  path: ../custom-element-apigen
-
-
 environment:
   sdk: ">=1.8.0 <2.0.0"

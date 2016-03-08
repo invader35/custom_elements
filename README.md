@@ -15,7 +15,7 @@ Also some styles from [polymerthemes.com](https://polymerthemes.com)
  
 ## To Update
 
-Uncomment `dependency_overrides` from pubspec and run :
+upgrade versions on `bower.json` and run :
 
     bower update
     pub run custom_element_apigen:update custom_elements_config.yaml
