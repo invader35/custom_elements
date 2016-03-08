@@ -1,3 +1,7 @@
+## 0.0.5+2
+
+Minor fixes and upgrade to latest apigen.
+
 ## 0.0.5 
 
 Added themes from [polymerthemes.com](https://polymerthemes.com)
