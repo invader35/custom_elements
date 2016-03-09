@@ -8,10 +8,11 @@
   "private": true,
   "dependencies": {
     "paper-datatable": "*",
-    "iron-data-table" : "iron-data-table#v1.0.0-alpha3",
+    "iron-data-table" : "iron-data-table#fix/null-items",
     "polymer-paper-date-picker": "*",
     "paper-time-picker": "*",
     "paper-chip":"*",
-    "paper-divider":"*"
+    "paper-divider":"*",
+    "paper-button": "PolymerElements/paper-button#^1.0.0"
   }
 }

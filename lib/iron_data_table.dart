@@ -92,6 +92,9 @@ import 'data_table_checkbox.dart';
 ///
 /// To get started, you can import `default-styles.html` which provides material design
 /// inspired styles to your `iron-data-table`.
+///
+/// __Important:__ Because `iron-list` must be explicitly sized, make sure set an explicit height either directly
+/// to `iron-data-table` or to any of its parents. Using `px` or `vh` values will work fine, default height is `400px`.
 @CustomElementProxy('iron-data-table')
 class IronDataTable extends HtmlElement with CustomElementProxyMixin, PolymerBase, IronResizableBehavior {
   IronDataTable.created() : super.created();

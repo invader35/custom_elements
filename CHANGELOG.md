@@ -1,3 +1,7 @@
+## 0.0.5+3
+
+Updated `iron-data-table` with `null-items` fix.
+
 ## 0.0.5+2
 
 Minor fixes and upgrade to latest apigen.

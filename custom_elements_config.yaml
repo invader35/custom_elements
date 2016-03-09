@@ -93,6 +93,7 @@ stubs_to_generate:
   - iron-icons/iron-icons.html
   - paper-ripple/paper-ripple.html
   - paper-material/paper-material.html
+  - paper-button/paper-button.html
 #  - paper-dropdown-menu/paper-dropdown-menu.html
 #  - paper-menu/paper-menu.html
   - paper-item/paper-item.html
