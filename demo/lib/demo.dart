@@ -15,12 +15,14 @@ import "package:custom_elements/paper_datatable_column.dart";
 import "package:custom_elements/paper_date_picker.dart";
 import "package:custom_elements/paper_time_picker.dart";
 import "package:custom_elements/paper_date_picker_dialog_style.dart";
-import "package:custom_elements/paper_chip.dart";
+//import "package:custom_elements/paper_chip.dart";
 import "package:polymer_elements/paper_button.dart";
 import "package:polymer_elements/paper_dialog.dart";
 import "package:custom_elements/paper_date_picker_dialog_style.dart";
 import "package:custom_elements/paper_divider.dart";
+import "package:custom_elements/vaadin_upload.dart";
 
+import "dart:async";
 
 class Item extends JsProxy {
   @reflectable String page;
@@ -36,7 +38,7 @@ class TestPolymerAutonotify extends PolymerElement {
     new Item(page: "pag1", title: "tit1"),
     new Item(page: "pag2", title: "tit2"),
     new Item(page: "pag3", title: "tit3")
-  ]*/ = null;
+  ]*/;
 
   @Property(notify: true) bool datePickerDialogOpened = false;
 
@@ -61,15 +63,18 @@ class TestPolymerAutonotify extends PolymerElement {
 
   void attached() {
 
-    set('myData', [
-      new Item(page: "pag1", title: "tit1"),
-      new Item(page: "pag2", title: "tit2"),
-      new Item(page: "pag3", title: "tit3"),
-      new Item(page: "pag4", title: "tit4"),
-      new Item(page: "pag5", title: "tit5"),
-      new Item(page: "pag6", title: "tit6"),
-      new Item(page: "pag7", title: "tit7")
-    ]);
+    new Future.delayed(new Duration(microseconds: 1)).then((_){
+      set('myData', [
+        new Item(page: "pag1", title: "tit1"),
+        new Item(page: "pag2", title: "tit2"),
+        new Item(page: "pag3", title: "tit3"),
+        new Item(page: "pag4", title: "tit4"),
+        new Item(page: "pag5", title: "tit5"),
+        new Item(page: "pag6", title: "tit6"),
+        new Item(page: "pag7", title: "tit7")
+      ]);
+    });
+
   }
 
 

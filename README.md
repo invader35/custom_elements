@@ -11,7 +11,8 @@ Also some styles from [polymerthemes.com](https://polymerthemes.com)
  - [paper-date-picker](https://customelements.io/bendavis78/paper-date-picker/)
  - [paper-time-picker](https://customelements.io/bendavis78/paper-time-picker/)
  - [iron-data-table](https://customelements.io/Saulis/iron-data-table/)
- - [paper-data-table](https://customelements.io/David-Mulder/paper-datatable/) SADLY NOT WORKING ON DART BECAUSE OF SOME `table` related problem (sigh)
+ - [paper-data-table](https://customelements.io/David-Mulder/paper-datatable/) SADLY NOT WORKING ON DART BECAUSE OF SOME `table` related problem (sigh) because of a `dart:html` bug
+ - [vaadin-upload](https://customelements.io/vaadin/vaadin-upload/)
  
 ## To Update
 
