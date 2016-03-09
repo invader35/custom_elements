@@ -9,3 +9,26 @@ What can you do ? You can port it to Dart by yourself ! This tutorial explains h
 ## 1. Setup a new project
 
 The first thing you have to do is to create a new project for the ported element.
+
+## 2. Writing the `bower.json` file
+
+## 3. Create a `custom-element-apigen` config file  
+
+### component to generate
+
+### stubs to generate
+
+### managing mixins
+
+### clean up the dirt
+
+## 4. importing the component and running `custom-element-apigen`
+
+## 5. Testing
+
+
+# Prerequisites
+
+ - polymer element
+ - bower repository
+ - dependencies
