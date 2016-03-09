@@ -8,11 +8,23 @@ What can you do ? You can port it to Dart by yourself ! This tutorial explains h
 
 ## 1. Setup a new project
 
-The first thing you have to do is to create a new project for the ported element.
+The first thing you have to do is to create a new project for the ported element. 
 
 ### Structure
 
+The project structure should be as following:
+    
+    my_imported_component/
+     lib/
+     test/
+     .bower.json
+     pubspec.yaml
+     
+`lib` and `test` folder are initially empty.
+
 ### the `pubspec.yaml`
+
+
 
 ### the `.bower.json`
 
