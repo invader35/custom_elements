@@ -2,7 +2,7 @@ name: custom_elements
 version: 0.0.5+3
 author: Vittorio Ballestra <vittorio.ballestra@drafintech.it>
 description: Custom Elements from Community ported to dart
-homepage: https://www.drafintech.it
+homepage: https://github.com/dam0vm3nt/custom_elements
 dependencies:
   polymer_interop: ^1.0.0-rc.5
   web_components: ^0.12.0
