@@ -20,7 +20,7 @@ The project structure should be as following:
      .bower.json
      pubspec.yaml
      
-`lib` and `test` folder are initially empty.
+`lib` and `test` folder are initially empty. the `lib` folder will be populated by generated sources while in the `test` folder you will put any unit test case you want to provide.
 
 ### the `pubspec.yaml`
 
