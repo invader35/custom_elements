@@ -27,26 +27,28 @@ The project structure should be as following:
 
 You should already know what this file is about. in the case of porting a js element some dependencies are needed in order to run the source generation tool. this is an example of a working `pubspec.yaml` :
 
-    name: your_project_name
-    version: 0.0.1
-    author: Your Name <an_email@address>
-    description: A Description
-    homepage: https://project.home.page
-    dependencies:
-     polymer_interop: ^1.0.0-rc.5
-     web_components: ^0.12.0
-     polymer_elements: ^1.0.0-rc.5
-    dev_dependencies:
-     browser: ^0.10.0
-     custom_element_apigen: ^0.2.2
-     html5lib: ">=0.11.0 <0.13.0"
-     path: ^1.0.0
-     polymer: ^1.0.0-rc.6
-     reflectable: ">=0.3.1 <0.5.0"
-     test: ^0.12.5+1
-     yaml: ">=1.0.0 <3.0.0"
-    environment:
-     sdk: ">=1.8.0 <2.0.0"
+```yaml
+name: your_project_name
+version: 0.0.1
+author: Your Name <an_email@address>
+description: A Description
+homepage: https://project.home.page
+dependencies:
+ polymer_interop: ^1.0.0-rc.5
+ web_components: ^0.12.0
+ polymer_elements: ^1.0.0-rc.5
+dev_dependencies:
+ browser: ^0.10.0
+ custom_element_apigen: ^0.2.2
+ html5lib: ">=0.11.0 <0.13.0"
+ path: ^1.0.0
+ polymer: ^1.0.0-rc.6
+ reflectable: ">=0.3.1 <0.5.0"
+ test: ^0.12.5+1
+ yaml: ">=1.0.0 <3.0.0"
+environment:
+ sdk: ">=1.8.0 <2.0.0"
+```
 
 You can add any other dependency you need, expecially if the component you want to port uses other components that are already ported to dart and you want to reuse the ported version.
 
@@ -54,9 +56,11 @@ You can add any other dependency you need, expecially if the component you want 
 
 This file is needed in order to force `bower` to install the component you want to port and all its dependencies into `lib/src` directory and should have the following content:
 
-    {
-      "directory": "lib/src"
-    }
+```
+{
+  "directory": "lib/src"
+}
+```
 
 ### Writing the `bower.json`
 
@@ -64,6 +68,27 @@ This file has the same meaning for `bower` as `pubspec.yaml` for `pub`. It conta
 
 This is an example of a `bower.json` for porting a simple component:
 
+```
+{
+  "name": "customelements-dart",
+  "version": "0.0.1",
+  "homepage": "https://github.com/d4m0vm3nt/custom-elements",
+  "authors": [
+    "Vittorio Ballestra <d4m0vment@github.org>"
+  ],
+  "private": true,
+  "dependencies": {
+    "paper-datatable": "*",
+    "iron-data-table" : "iron-data-table#master",
+    "polymer-paper-date-picker": "*",
+    "paper-time-picker": "*",
+    "paper-chip":"*",
+    "paper-divider":"*",
+    "paper-button": "PolymerElements/paper-button#^1.0.0",
+    "vaadin-upload": "*"
+  }
+}
+```
 
 
 
