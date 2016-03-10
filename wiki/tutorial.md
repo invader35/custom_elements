@@ -24,6 +24,8 @@ The project structure should be as following:
 
 ### the `pubspec.yaml`
 
+you should already know what this file is about. in the case of porting a js element some dependencies are needed in order to run the source generation tool. this is an example of a working `pubspec.yaml` :
+
 
 
 ### the `.bower.json`
