@@ -10,7 +10,7 @@
             }
 
             :host {
-                @apply(--layout-vertical);
+           /*     @apply(--layout-vertical);*/
             }
 
             .tbl {
@@ -33,7 +33,7 @@
         <h1> hello </h1>
 
         <b>iron-data-table</b>
-        <iron-data-table items="[[myData]]" selection-enabled multi-selection>
+        <iron-data-table items="[[myData]]" selection-enabled multi-selection style="height: 200px">
             <data-table-column name="Page" sort-by="page" width="50px" flex="0">
                 <template>
                     <span>[[item.page]]</span>
@@ -43,8 +43,18 @@
                 <template>[[item.title]]</template>
             </data-table-column>
         </iron-data-table>
-        <!-- NOT WORKING, seams a polymer bug because of template inside tbody
 
+        <b> vaadin grid </b>
+        <vaadin-grid items="[[myData]]" selection-mode="multi" frozen-columns="1">
+            <table>
+                <colgroup>
+                    <col name="page">
+                    <col name="title" hidable>
+                </colgroup>
+            </table>
+        </vaadin-grid>
+        <!-- NOT WORKING, seams a polymer bug because of template inside tbody
+ -->
         <b>paper-datatable</b>
         <paper-datatable class="tbl" data="{{myData}}" selectable multi-selection>
             <paper-datatable-column header="Page" property="page">
@@ -53,7 +63,7 @@
             </paper-datatable-column>
         </paper-datatable>
 
-        -->
+
         <div>
             <paper-input value="{{currentDate}}">
                 <iron-icon icon="add" on-tap="showDatePicker" suffix></iron-icon>

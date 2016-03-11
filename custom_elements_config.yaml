@@ -13,6 +13,7 @@ package_mappings:
   - Paper: polymer_elements
 # Configuration for running tool/generate_dart_api.dart
 files_to_generate:
+  - vaadin-grid/vaadin-grid.html
   - paper-divider/paper-divider.html
   - paper-time-picker/paper-time-picker.html:
      omit_imports:

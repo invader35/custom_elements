@@ -1,3 +1,7 @@
+## 0.0.7
+
+ - added `vaadin-grid`
+
 ## 0.0.6
 
  - added `vaadin-upload`
