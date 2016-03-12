@@ -51,7 +51,7 @@ environment:
  sdk: ">=1.8.0 <2.0.0"
 ```
 
-You can add any other dependency you need, expecially if the component you want to port uses other components that are already ported to dart and you want to reuse the ported version.
+You can add any other dependency you need, for example you can put references to other component libraries that already ported to dart and you want to reuse.
 
 ### 1.3 The `.bowerrc`
 
