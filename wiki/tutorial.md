@@ -96,9 +96,9 @@ There are many option you can use to bend the tool at your will, let's see the m
 
 ### component to generate
 
-thi section is where you specicy which `.html` need to be ported to dart. the path is relative to `lib/src`.
+This section is where you specicy which `.html` need to be ported to dart. the path is relative to `lib/src`.
 
-here's an example:
+Here's an example:
 
 ```yaml
 files_to_generate:
@@ -144,22 +144,69 @@ package_mappings:
   - paper-calendar: custom_elements
 ```
 
-This is a list of regular expressions mapping to package names.
+This is a list of regular expressions mapping to package names. In the example above any element matching the regular expression `paper-datatable` or `paper-calendar` would be mapped into package `custom_elements`.
 
 ### stubs to generate
 
-This is 
+In this section one can specify which stubs should be generated in order to make the original polymer-JS element you intend to port reuse existing ported elements from other libraries.
+
+For instance if your component is using a `<paper-button>` you will need to write a package mapping for it and to generate stubs:
+
+```
+package_mappings:
+ - ^paper-.* : polymer_elements
+stubs_to_generate:
+ polymer_elements:
+  - paper-button/paper-button.html
+```
 
 ### managing mixins and special cases
 
+When a component you want to port is using a behavior you will have to let the tool preload it in order to properly analyze it. This is done in the section `files_to_load`. Usually you will also have to omit corresponding the generated import and replace it with the right one.
+
+Here's an example of preloading the `resize behavior` and the `templatizer`:
+
+```
+files_to_load:
+  - package:polymer_interop/src/js/debug/src/lib/template/templatizer.html
+  - package:polymer_elements/src/iron-resizable-behavior/iron-resizable-behavior.html
+```
+
+References are relative to pre-existing ported packages.
+
 ### clean up the dirt
+
+After the `custom_element_apigen` tool has run you may want to clean up every unwanted files in order to keep your library the smaller as possible.
+You can specify a list of regular expression matching paths relative to `lib/src` to be deleted:
+
+```
+deletion_patterns:
+ - ^iron-ajax
+ - ^font-roboto
+ - ...
+```
 
 ## 4. importing the component and running `custom-element-apigen`
 
+When everything is setup you need to bower import your components and run the code generator. This is done by issuing the following commands:
+ - `bower install`
+ - `pub run custom_element_apigen:update you_custom_element_apigen_config_file.yaml`
+
+Then just check the generated sources to see if everythings looks right. If something is gone wrong probably the followings are possible fixes:
+ - add files to load 
+ - add files to be generated
+ - fix package mappings, generated stubs
+ - apply name/type substitutions 
+
 ## 5. Testing and checking
+
+When everything looks right just import your new library and play with it. If you can write some good unit test. 
 
 # Prerequisites
 
- - polymer element
- - bower repository
- - dependencies
+Components to be ported should obey some requisites:
+
+ - components should be polymer 1.0 components.
+ - they should be "bower enabled"
+ - check the component dependencies if they match the current versions of `polymer` and `elements` currently ported to Dart. At the moment of
+   writing `polymer-dart` matches `polymer-js` v. 1.2.4.
