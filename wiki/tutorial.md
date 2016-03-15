@@ -96,6 +96,30 @@ There are many option you can use to bend the tool at your will, let's see the m
 
 ### component to generate
 
+thi section is where you specicy which `.html` need to be ported to dart. the path is relative to `lib/src`.
+
+here's an example:
+
+```yaml
+files_to_generate:
+  - vaadin-grid/vaadin-grid.html
+  - paper-divider/paper-divider.html
+  - paper-time-picker/paper-time-picker.html:
+     omit_imports:
+      - src/iron-resizable-behavior
+      - fade-in-animation.html
+      - fade-out-animation.html
+     extra_imports:
+      - package:polymer_elements/iron_resizable_behavior.dart
+      - package:polymer_elements/neon_animation/animations/fade_in_animation.dart
+      - package:polymer_elements/neon_animation/animations/fade_out_animation.dart
+```
+
+for each files there are a couple of option you can specify to customize code generation:
+
+ - `omit_imports` a list of regular expressions matching import directives you don't want to be 
+
+
 ### package mapping
 
 ### stubs to generate
