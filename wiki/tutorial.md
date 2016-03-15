@@ -117,12 +117,38 @@ files_to_generate:
 
 for each files there are a couple of option you can specify to customize code generation:
 
- - `omit_imports` a list of regular expressions matching import directives you don't want to be 
-
+ - `omit_imports` a list of regular expressions matching import directives you don't want to be generated
+ - `extra_imports` a list of extra imports you want to add into the generated file
+ - `name_substitutions` a map of naming sostitutions to be applied when generating code, like for example:
+   ```
+   - iron-media-query/iron-media-query.html:
+      name_substitutions:
+        query: mediaQuery
+   ```
+ - `type_overrides` a map of classes an attributes whose type should be overridden, like this:
+    ```
+     - iron-selector/iron-selectable.html:
+      type_overrides:
+        IronSelectableBehavior:
+          selected:
+            type: any
+    ```
 
 ### package mapping
 
+In this section you can specify how elements are mapped to packages when generating import statments.
+For example:
+```
+package_mappings:
+  - paper-datatable: custom_elements
+  - paper-calendar: custom_elements
+```
+
+This is a list of regular expressions mapping to package names.
+
 ### stubs to generate
+
+This is 
 
 ### managing mixins and special cases
 
