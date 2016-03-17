@@ -24,6 +24,9 @@ import "package:custom_elements/paper_date_picker_dialog_style.dart";
 import "package:custom_elements/paper_divider.dart";
 import "package:custom_elements/vaadin_upload.dart";
 import "package:custom_elements/vaadin_grid.dart";
+import "package:polymer_elements/paper_tabs.dart";
+import "package:polymer_elements/paper_tab.dart";
+import "package:polymer_elements/iron_pages.dart";
 
 import "dart:async";
 
@@ -37,11 +40,29 @@ class Item extends JsProxy {
 @PolymerRegister("test-custom-elements")
 class TestPolymerAutonotify extends PolymerElement {
 
+  @property int selectedPage = 0;
+
+
+  @property List<String> cols = ["page","title"];
+
+
   @property var myData/* = [
     new Item(page: "pag1", title: "tit1"),
     new Item(page: "pag2", title: "tit2"),
     new Item(page: "pag3", title: "tit3")
   ]*/;
+
+  @reflectable
+  String contentOf(Item item,String colName) {
+    switch(colName) {
+      case "page":
+        return item.page;
+      case "title":
+        return item.title;
+    }
+
+    return "?";
+  }
 
   @Property(notify: true) bool datePickerDialogOpened = false;
 

@@ -25,84 +25,143 @@
                 --paper-chip-background-color: red;
             }
 
+            .vl {
+                @apply(--layout-vertical);
+            }
+
+            .fl {
+                @apply(--layout-flex);
+            }
+
+            .rel {
+                position: relative;
+            }
+
+            .ov {
+                overflow: auto;
+            }
+
         </style>
         <style include="iron-data-table-style"></style>
         <style include="paper-date-picker-dialog-style"></style>
         <style include="paper-time-picker-dialog-style"></style>
 
-        <h1> hello </h1>
+        <div class="fit vl">
+            <paper-tabs selected="{{selectedPage}}">
+                <paper-tab>Varia</paper-tab>
+                <paper-tab>Layout</paper-tab>
+            </paper-tabs>
+            <iron-pages class="fl rel ov" selected="[[selectedPage]]">
+                <div>
+                    <h1> Demos </h1>
 
-        <b>iron-data-table</b>
-        <iron-data-table items="[[myData]]" selection-enabled multi-selection style="height: 200px">
-            <data-table-column name="Page" sort-by="page" width="50px" flex="0">
-                <template>
-                    <span>[[item.page]]</span>
-                </template>
-            </data-table-column>
-            <data-table-column name="Title" sort-by="title" flex="1" filter-by="title">
-                <template>[[item.title]]</template>
-            </data-table-column>
-        </iron-data-table>
+                    <b>iron-data-table</b>
+                    <iron-data-table items="[[myData]]" selection-enabled multi-selection style="height: 200px">
+                        <data-table-column name="Page" sort-by="page" width="50px" flex="0">
+                            <template>
+                                <span>[[item.page]]</span>
+                            </template>
+                        </data-table-column>
+                        <data-table-column name="Title" sort-by="title" flex="1" filter-by="title">
+                            <template>[[item.title]]</template>
+                        </data-table-column>
+                        <template is="dom-repeat" items="[[cols]]" as="col">
+                            <data-table-column name="[[col]]" sort-by="title" flex="1" filter-by="title">
+                                <template>
+                                    <span>[[contentOf(item,col)]]</span>
+                                </template>
+                            </data-table-column>
+                        </template>
+                    </iron-data-table>
 
-        <b> vaadin grid </b>
-        <vaadin-grid items="[[myData]]" selection-mode="multi" frozen-columns="1">
-            <table>
-                <colgroup>
-                    <col name="page">
-                    <col name="title" hidable>
-                </colgroup>
-            </table>
-        </vaadin-grid>
-        <!-- NOT WORKING, seams a polymer bug because of template inside tbody
- -->
-        <b>paper-datatable</b>
-        <paper-datatable class="tbl" data="{{myData}}" selectable multi-selection>
-            <paper-datatable-column header="Page" property="page">
-            </paper-datatable-column>
-            <paper-datatable-column header="Title" property="title">
-            </paper-datatable-column>
-        </paper-datatable>
+                    <b> vaadin grid </b>
+                    <vaadin-grid items="[[myData]]" selection-mode="multi" frozen-columns="1">
+                        <table>
+                            <colgroup>
+                                <template is="dom-repeat" items="[[cols]]" as="col">
+                                    <col name="[[col]]">
+                                </template>
+                            </colgroup>
+                        </table>
+                    </vaadin-grid>
+                    <!-- NOT WORKING, seams a polymer bug because of template inside tbody
+             -->
+                    <b>paper-datatable</b>
+                    <paper-datatable class="tbl" data="{{myData}}" selectable multi-selection>
+                        <paper-datatable-column header="Page" property="page">
+                        </paper-datatable-column>
+                        <paper-datatable-column header="Title" property="title">
+                        </paper-datatable-column>
+                    </paper-datatable>
 
 
-        <div>
-            <paper-input value="{{currentDate}}">
-                <iron-icon icon="add" on-tap="showDatePicker" suffix></iron-icon>
-            </paper-input>
-        <paper-button on-tap="showDatePicker">date picker</paper-button>
-        <paper-dialog opened="{{datePickerDialogOpened}}" id="dlg1" class="paper-date-picker-dialog" modal >
-            <h2>Date picker</h2>
-            <paper-date-picker locale="it" date="{{currentDate}}"></paper-date-picker>
-            <div class="buttons">
-                <paper-button dialog-confirm>ok</paper-button>
-                <paper-button dialog-dismiss>cancel</paper-button>
-            </div>
-        </paper-dialog>
+                    <div>
+                        <paper-input value="{{currentDate}}">
+                            <iron-icon icon="add" on-tap="showDatePicker" suffix></iron-icon>
+                        </paper-input>
+                        <paper-button on-tap="showDatePicker">date picker</paper-button>
+                        <paper-dialog opened="{{datePickerDialogOpened}}" id="dlg1" class="paper-date-picker-dialog" modal >
+                            <h2>Date picker</h2>
+                            <paper-date-picker locale="it" date="{{currentDate}}"></paper-date-picker>
+                            <div class="buttons">
+                                <paper-button dialog-confirm>ok</paper-button>
+                                <paper-button dialog-dismiss>cancel</paper-button>
+                            </div>
+                        </paper-dialog>
 
-            <paper-input value="{{currentTime}}"></paper-input>
-        <paper-button on-tap="showTimePicker">time picker</paper-button>
-        <paper-dialog opened="{{timePickerDialogOpened}}" id="dlg2" class="paper-time-picker-dialog" modal >
-            <h2>Date picker</h2>
-            <paper-time-picker locale="it" time="{{currentTime}}"></paper-time-picker>
-            <div class="buttons">
-                <paper-button dialog-confirm>ok</paper-button>
-                <paper-button dialog-dismiss>cancel</paper-button>
-            </div>
-        </paper-dialog>
-            <div>
-            <paper-chip removable class="red-chip">
-                <iron-icon class="icon" icon="icons:add"></iron-icon>
-                <h1>John Doe</h1>
-                <h2>jdoe@example.com</h2>
-            </paper-chip>
-<paper-divider></paper-divider>
-            <paper-chip label="Jane Doe">
-                <div class="icon">J</div>
-                <h1>jdoe@example.com</h1>
-            </paper-chip>
-            </div>
+                        <paper-input value="{{currentTime}}"></paper-input>
+                        <paper-button on-tap="showTimePicker">time picker</paper-button>
+                        <paper-dialog opened="{{timePickerDialogOpened}}" id="dlg2" class="paper-time-picker-dialog" modal >
+                            <h2>Date picker</h2>
+                            <paper-time-picker locale="it" time="{{currentTime}}"></paper-time-picker>
+                            <div class="buttons">
+                                <paper-button dialog-confirm>ok</paper-button>
+                                <paper-button dialog-dismiss>cancel</paper-button>
+                            </div>
+                        </paper-dialog>
+                        <div>
+                            <paper-chip removable class="red-chip">
+                                <iron-icon class="icon" icon="icons:add"></iron-icon>
+                                <h1>John Doe</h1>
+                                <h2>jdoe@example.com</h2>
+                            </paper-chip>
+                            <paper-divider></paper-divider>
+                            <paper-chip label="Jane Doe">
+                                <div class="icon">J</div>
+                                <h1>jdoe@example.com</h1>
+                            </paper-chip>
+                        </div>
+                    </div>
+
+                    <vaadin-upload></vaadin-upload>
+                </div>
+                <div class="vl fit">
+                    <h1>Layout</h1>
+
+                        <iron-data-table items="[[myData]]" selection-enabled multi-selection class="fl">
+                            <data-table-column name="Page" sort-by="page" width="50px" flex="0">
+                                <template>
+                                    <span>[[item.page]]</span>
+                                </template>
+                            </data-table-column>
+                            <data-table-column name="Title" sort-by="title" flex="1" filter-by="title">
+                                <template>[[item.title]]</template>
+                            </data-table-column>
+                            <template is="dom-repeat" items="[[cols]]" as="col">
+                                <data-table-column name="[[col]]" sort-by="title" flex="1" filter-by="title">
+                                    <template>
+                                        <span>[[contentOf(item,col)]]</span>
+                                    </template>
+                                </data-table-column>
+                            </template>
+                        </iron-data-table>
+
+                    <div>
+                        <paper-button>TEST</paper-button>
+                    </div>
+                </div>
+            </iron-pages>
         </div>
-
-        <vaadin-upload></vaadin-upload>
 
     </template>
 </dom-module>
