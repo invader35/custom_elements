@@ -114,7 +114,6 @@ to `iron-data-table` or to any of its parents. Using `px` or `vh` values will wo
     <style is="custom-style">
       :host {
         display: block;
-        height: 400px;
         position: relative;
         overflow-x: auto;
         overflow-y: hidden;
@@ -122,7 +121,11 @@ to `iron-data-table` or to any of its parents. Using `px` or `vh` values will wo
       }
 
       #container {
-        height: inherit;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+
         display: flex;
         flex-direction: column;
       }
@@ -190,9 +193,7 @@ to `iron-data-table` or to any of its parents. Using `px` or `vh` values will wo
       #list {
         overflow-x: hidden !important;
         overflow-y: auto !important;
-        flex-basis: 100%;
-        flex-shrink: 1;
-        flex-grow: 0;
+        flex: 1;
       }
 
       .item {

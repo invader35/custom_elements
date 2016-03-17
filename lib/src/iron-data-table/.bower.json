@@ -51,18 +51,19 @@
     "iron-flex-layout": "polymerelements/iron-flex-layout#^1.2.3",
     "iron-component-page": "polymerelements/iron-component-page#^1.1.4",
     "iron-ajax": "polymerelements/iron-ajax#^1.1.1",
-    "vaadin-combo-box": "^1.0.0-alpha6"
+    "vaadin-combo-box": "^1.0.0-alpha6",
+    "paper-slider": "polymerelements/paper-slider#^1.0.9"
   },
   "resolutions": {
     "iron-list": "^1.1.0"
   },
-  "_release": "ea6603fa08",
+  "_release": "76dd11666d",
   "_resolution": {
     "type": "branch",
-    "branch": "master",
-    "commit": "ea6603fa08cc44ad2dee33166fc220e250560fcb"
+    "branch": "feature/flex-height",
+    "commit": "76dd11666d6fcac5e2d2cfd95dbca6921ad855ce"
   },
   "_source": "git://github.com/Saulis/iron-data-table.git",
-  "_target": "master",
+  "_target": "feature/flex-height",
   "_originalSource": "iron-data-table"
 }

@@ -1,3 +1,7 @@
+##  0.0.7+1
+
+ - merged fix for [issue 17](https://github.com/Saulis/iron-data-table/issues/17) for `iron-data-table`. 
+
 ## 0.0.7
 
  - added `vaadin-grid`
