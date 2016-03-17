@@ -51,7 +51,7 @@ environment:
  sdk: ">=1.8.0 <2.0.0"
 ```
 
-You can add any other dependency you need, expecially if the component you want to port uses other components that are already ported to dart and you want to reuse the ported version.
+You can add any other dependency you need, for example you can put references to other component libraries that already ported to dart and you want to reuse.
 
 ### 1.3 The `.bowerrc`
 
@@ -96,20 +96,117 @@ There are many option you can use to bend the tool at your will, let's see the m
 
 ### component to generate
 
+This section is where you specicy which `.html` need to be ported to dart. the path is relative to `lib/src`.
+
+Here's an example:
+
+```yaml
+files_to_generate:
+  - vaadin-grid/vaadin-grid.html
+  - paper-divider/paper-divider.html
+  - paper-time-picker/paper-time-picker.html:
+     omit_imports:
+      - src/iron-resizable-behavior
+      - fade-in-animation.html
+      - fade-out-animation.html
+     extra_imports:
+      - package:polymer_elements/iron_resizable_behavior.dart
+      - package:polymer_elements/neon_animation/animations/fade_in_animation.dart
+      - package:polymer_elements/neon_animation/animations/fade_out_animation.dart
+```
+
+for each files there are a couple of option you can specify to customize code generation:
+
+ - `omit_imports` a list of regular expressions matching import directives you don't want to be generated
+ - `extra_imports` a list of extra imports you want to add into the generated file
+ - `name_substitutions` a map of naming sostitutions to be applied when generating code, like for example:
+   ```
+   - iron-media-query/iron-media-query.html:
+      name_substitutions:
+        query: mediaQuery
+   ```
+ - `type_overrides` a map of classes an attributes whose type should be overridden, like this:
+    ```
+     - iron-selector/iron-selectable.html:
+      type_overrides:
+        IronSelectableBehavior:
+          selected:
+            type: any
+    ```
+
 ### package mapping
+
+In this section you can specify how elements are mapped to packages when generating import statments.
+For example:
+```
+package_mappings:
+  - paper-datatable: custom_elements
+  - paper-calendar: custom_elements
+```
+
+This is a list of regular expressions mapping to package names. In the example above any element matching the regular expression `paper-datatable` or `paper-calendar` would be mapped into package `custom_elements`.
 
 ### stubs to generate
 
+In this section one can specify which stubs should be generated in order to make the original polymer-JS element you intend to port reuse existing ported elements from other libraries.
+
+For instance if your component is using a `<paper-button>` you will need to write a package mapping for it and to generate stubs:
+
+```
+package_mappings:
+ - ^paper-.* : polymer_elements
+stubs_to_generate:
+ polymer_elements:
+  - paper-button/paper-button.html
+```
+
 ### managing mixins and special cases
+
+When a component you want to port is using a behavior you will have to let the tool preload it in order to properly analyze it. This is done in the section `files_to_load`. Usually you will also have to omit corresponding the generated import and replace it with the right one.
+
+Here's an example of preloading the `resize behavior` and the `templatizer`:
+
+```
+files_to_load:
+  - package:polymer_interop/src/js/debug/src/lib/template/templatizer.html
+  - package:polymer_elements/src/iron-resizable-behavior/iron-resizable-behavior.html
+```
+
+References are relative to pre-existing ported packages.
 
 ### clean up the dirt
 
+After the `custom_element_apigen` tool has run you may want to clean up every unwanted files in order to keep your library the smaller as possible.
+You can specify a list of regular expression matching paths relative to `lib/src` to be deleted:
+
+```
+deletion_patterns:
+ - ^iron-ajax
+ - ^font-roboto
+ - ...
+```
+
 ## 4. importing the component and running `custom-element-apigen`
+
+When everything is setup you need to bower import your components and run the code generator. This is done by issuing the following commands:
+ - `bower install`
+ - `pub run custom_element_apigen:update you_custom_element_apigen_config_file.yaml`
+
+Then just check the generated sources to see if everythings looks right. If something is gone wrong probably the followings are possible fixes:
+ - add files to load 
+ - add files to be generated
+ - fix package mappings, generated stubs
+ - apply name/type substitutions 
 
 ## 5. Testing and checking
 
+When everything looks right just import your new library and play with it. If you can write some good unit test. 
+
 # Prerequisites
 
- - polymer element
- - bower repository
- - dependencies
+Components to be ported should obey some requisites:
+
+ - components should be polymer 1.0 components.
+ - they should be "bower enabled"
+ - check the component dependencies if they match the current versions of `polymer` and `elements` currently ported to Dart. At the moment of
+   writing `polymer-dart` matches `polymer-js` v. 1.2.4.
