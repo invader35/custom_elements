@@ -1,6 +1,6 @@
 name: demo_custom_elements
 description: Demo project for polymer datepicker
-version: 0.0.1
+version: 0.0.2
 author: Vittorio Ballestra <vittorio.ballestra@drafintech.it>
 homepage: https://github.com/dam0vm3nt/polymer_autonotify
 environment:
