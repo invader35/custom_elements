@@ -11,6 +11,9 @@ dependencies:
   custom_elements:
     path: ..
 
+#dependency_overrides:
+# polymer_elements:
+#  path: ../../polymer_elements
 transformers:
 - polymer:
     entry_points:

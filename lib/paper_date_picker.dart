@@ -20,8 +20,39 @@ import 'package:polymer_elements/paper_styles.dart';
 import 'moment_with_locales_import.dart';
 import 'package:custom_elements/paper_calendar.dart';
 import 'package:custom_elements/paper_date_picker_dialog_style.dart';
+import 'package:custom_elements/paper_year_list.dart';
 
-/// include dialog style at document-level for backward compatibility
+/// Material Design [Pickers](http://www.google.com/design/spec/components/pickers.html)
+///
+/// Provides a responsive date picker based on the material design spec.
+///
+/// ## Examples:
+///
+/// Default picker:
+///
+///     <paper-date-picker></paper-date-picker>
+///
+/// Setting the initial date to April 20, 2015:
+///
+///     <paper-date-picker date="April 20, 2015"></paper-date-picker>
+///
+/// You may also specify a minimum and/or maximum date allowed in this picker using
+/// the same date notation:
+///
+///     <paper-date-picker min-date="April 1, 2015" max-date="June 30, 2015"></paper-date-picker>
+///
+/// If you include this element as part of `paper-dialog`, use the class
+/// `"paper-date-picker-dialog"` on the dialog element in order to give it proper
+/// styling:
+///
+///     <paper-dialog id="dialog" class="paper-date-picker-dialog" modal
+///       on-iron-overlay-closed="dismissDialog">
+///       <paper-date-picker id="picker" date="[[date]]"></paper-date-picker>
+///       <div class="buttons">
+///         <paper-button dialog-dismiss>Cancel</paper-button>
+///         <paper-button dialog-confirm>OK</paper-button>
+///       </div>
+///     </paper-dialog>
 @CustomElementProxy('paper-date-picker')
 class PaperDatePicker extends HtmlElement with CustomElementProxyMixin, PolymerBase, IronResizableBehavior {
   PaperDatePicker.created() : super.created();
@@ -64,9 +95,6 @@ class PaperDatePicker extends HtmlElement with CustomElementProxyMixin, PolymerB
   /// Maximum screen width at which the picker uses a vertical layout
   String get responsiveWidth => jsElement[r'responsiveWidth'];
   set responsiveWidth(String value) { jsElement[r'responsiveWidth'] = value; }
-
-  List get years => jsElement[r'years'];
-  set years(List value) { jsElement[r'years'] = (value != null && value is! JsArray) ? new JsObject.jsify(value) : value;}
 
   dateFormat() =>
       jsElement.callMethod('dateFormat', []);

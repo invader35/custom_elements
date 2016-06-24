@@ -13,18 +13,24 @@ The following custom properties are available for styling the component.
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--vaadin-upload-file`|Styles for the entire host element|`{}`
-`--vaadin-upload-file-row`|Styles for the file row|`{}`
-`--vaadin-upload-file-meta`|Styles for the info container|`{}`
-`--vaadin-upload-file-name`|Styles for the file name|`{}`
-`--vaadin-upload-file-status`|Styles for the file status label|`{}`
-`--vaadin-upload-file-error`|Styles for the file error label|`{}`
-`--vaadin-upload-file-commands`|Styles for the buttons container|`{}`
-`--vaadin-upload-file-progress`|Styles for the included paper-progress|`{}`
-`--vaadin-upload-file-progress-error`|Styles for the progress bar when error is set|`{}`
-`--vaadin-upload-file-progress-indeterminate`|Styles for the progress bar when indeterminate|`{}`
-`--vaadin-upload-file-progress-uploading-indeterminate`|Styles for the progress bar when uploading and indeterminate|`{}`
-`--vaadin-upload-file-progress-complete`|Styles for the progress when file is complete|`{}`
+`--vaadin-upload-file`|A mixin that is applied to the host element|`{}`
+`--vaadin-upload-file-row`|A mixin that is applied to the file row|`{}`
+`--vaadin-upload-file-status-icon`|A mixin that is applied to all file status icons. By default, file status icons are hidden until the upload process finishes.|`{}`
+`--vaadin-upload-file-status-icon-complete`|A mixin that is applied to the complete status icon when the upload process succeeds|`{}`
+`--vaadin-upload-file-status-icon-error`|A mixin that is applied to the error status icon when the upload process fails|`{}`
+`--vaadin-upload-file-meta`|A mixin that is applied to the info container|`{}`
+`--vaadin-upload-file-meta-complete`|A mixin that is applied to the info container when file upload is complete|`{}`
+`--vaadin-upload-file-meta-error`|A mixin that is applied to the info container when an error happens|`{}`
+`--vaadin-upload-file-name`|A mixin that is applied to the file name|`{}`
+`--vaadin-upload-file-status`|A mixin that is applied to the file status label|`{}`
+`--vaadin-upload-file-error`|A mixin that is applied to the file error label|`{}`
+`--vaadin-upload-file-commands`|A mixin that is applied to the buttons container|`{}`
+`--vaadin-upload-file-progress`|A mixin that is applied to the included paper-progress|`{}`
+`--vaadin-upload-file-progress-error`|A mixin that is applied to the progress bar when error is set|`{}`
+`--vaadin-upload-file-progress-indeterminate`|A mixin that is applied to the progress bar when indeterminate|`{}`
+`--vaadin-upload-file-progress-uploading-indeterminate`|A mixin that is applied to the progress bar when uploading and indeterminate|`{}`
+`--vaadin-upload-file-progress-complete`|A mixin that is applied to the progress when file is complete|`{}`
+`--vaadin-upload-file-canceled`|A mixin that is applied to the upload cancel animation|`{}`
 
 @element vaadin-upload-file
 @demo demo/
@@ -34,6 +40,8 @@ Custom property | Description | Default
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../paper-styles/typography.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../paper-progress/paper-progress.html">
 
@@ -42,8 +50,8 @@ Custom property | Description | Default
     <style>
       :host {
         @apply(--layout-vertical);
-        margin: 8px 0;
-        padding: 8px 0 0;
+        margin: 4px 0 0;
+        padding: 6px 0 4px;
         @apply(--vaadin-upload-file);
       }
 
@@ -54,16 +62,55 @@ Custom property | Description | Default
         @apply(--vaadin-upload-file-row);
       }
 
+      iron-icon {
+        width: 24px;
+        height: 24px;
+        padding: 8px;
+        color: var(--primary-text-color, #000);
+        opacity: 0;
+        margin-right: -40px;
+        transition: margin-right 0.3s 0.1s, opacity 0.3s;
+        @apply(--vaadin-upload-file-status-icon);
+      }
+
+      iron-icon[icon="warning"] {
+        color: var(--error-color, #f40303);
+      }
+
+      iron-icon[complete],
+      iron-icon[error] {
+        margin-right: 0;
+        opacity: 1;
+        transition: margin-right 0.3s, opacity 0.3s 0.1s;
+      }
+
+      iron-icon[complete] {
+        @apply(--vaadin-upload-file-status-icon-complete);
+      }
+
+      iron-icon[error] {
+        @apply(--vaadin-upload-file-status-icon-error);
+      }
+
       #meta {
         @apply(--layout-vertical);
         @apply(--layout-flex);
+        height: 32px;
+        transition: height 0.1s;
         width: 1px;
         color: var(--disabled-text-color, gray);
         @apply(--vaadin-upload-file-meta);
       }
 
       #meta[complete] {
+        height: 16px;
         color: var(--primary-text-color, #000);
+        @apply(--vaadin-upload-file-meta-complete);
+      }
+
+      #meta[error] {
+        color: var(--error-color, #f40303);
+        @apply(--vaadin-upload-file-meta-error);
       }
 
       #name,
@@ -93,24 +140,17 @@ Custom property | Description | Default
       }
 
       #commands {
-        margin-right: -4px;
-        @apply(--vaadin-upload-file-commands);
         @apply(--layout-horizontal);
+        @apply(--vaadin-upload-file-commands);
       }
 
       #commands [icon] {
-        margin-left: -4px;
-        margin-right: -4px;
         color: var(--primary-text-color, #000);
       }
 
       #commands [icon="refresh"],
       #commands [icon="clear"] {
         color: var(--primary-color, #00B4F0);
-      }
-
-      #commands [icon="warning"] {
-        color: var(--error-color, #f40303);
       }
 
       paper-progress {
@@ -142,21 +182,48 @@ Custom property | Description | Default
         @apply(--vaadin-upload-file-progress-complete);
       }
 
+      :host(.fade-out) {
+        animation-name: fade-out;
+        animation-duration: 0.6s;
+        @apply(--vaadin-upload-file-canceled);
+      }
+
+      @keyframes fade-out {
+        0% {
+          max-height: 38px;
+        }
+        33%  {
+          max-height: 38px;
+          margin: 4px 0 0;
+          padding: 6px 0 4px;
+          opacity: 0.25;
+        }
+        67% {
+          opacity: 0;
+        }
+        100% {
+          max-height: 0px;
+          margin: 0;
+          padding: 0;
+          opacity: 0;
+        }
+      }
     </style>
 
     <div id="row">
 
-      <div id="meta" complete$="[[file.complete]]">
+      <iron-icon icon="done" complete$="[[file.complete]]"></iron-icon>
+      <iron-icon icon="warning" error$="[[file.error]]"></iron-icon>
+
+      <div id="meta" complete$="[[file.complete]]" error$="[[file.error]]">
         <div id="name">[[file.name]]</div>
         <div id="status" hidden$="[[!file.status]]">[[file.status]]</div>
         <div id="error" hidden$="[[!file.error]]">[[file.error]]</div>
       </div>
 
       <div id="commands">
-        <paper-icon-button disabled icon="done" title="Complete" hidden$="[[!file.complete]]"></paper-icon-button>
-        <paper-icon-button disabled icon="warning" title="Error" hidden$="[[!file.error]]"></paper-icon-button>
-        <paper-icon-button icon="refresh" title="Retry Upload" file-event="file-retry" on-tap="_fireFileEvent" hidden$="[[!file.error]]"></paper-icon-button>
-        <paper-icon-button icon="clear" title="Abort Upload" file-event="file-abort" on-tap="_fireFileEvent"></paper-icon-button>
+        <paper-icon-button icon="refresh" file-event="file-retry" on-tap="_fireFileEvent" hidden$="[[!file.error]]"></paper-icon-button>
+        <paper-icon-button icon="clear" file-event="file-abort" on-tap="_fireFileEvent"></paper-icon-button>
       </div>
 
     </div>
@@ -188,11 +255,26 @@ Custom property | Description | Default
     },
 
     observers: [
-      '_fileChanged(file.*)'
+      '_fileChanged(file.*)',
+      '_fileAborted(file.abort)'
     ],
 
     _fileChanged: function() {
       this.$.progress.updateStyles();
+    },
+
+    _fileAborted: function(abort) {
+      if (abort) {
+        this.toggleClass('fade-out', true);
+        var animationName = window.getComputedStyle(this).animationName;
+        if (!animationName || animationName === 'none') {
+          this.fire('file-remove', {file: this.file});
+        } else {
+          this.addEventListener('animationend', function() {
+            this.fire('file-remove', {file: this.file});
+          }.bind(this));
+        }
+      }
     },
 
     _fireFileEvent: function(e) {
@@ -201,23 +283,33 @@ Custom property | Description | Default
       return this.fire(button.getAttribute('file-event'), {file: this.file});
     }
 
-    /**
-     * Fired when retry button pressed. Listened by `vaadin-upload`. Fire this
-     * event if you want to perform retry upload.
-     *
-     * @event file-retry
-     * @param {Object} detail
-     *  @param {Object} detail.file file to retry upload of
-     */
+   /**
+    * Fired when the retry button is pressed. It is listened by `vaadin-upload`
+    * which will start a new upload process of this file.
+    *
+    * @event file-retry
+    * @param {Object} detail
+    *  @param {Object} detail.file file to retry upload of
+    */
 
     /**
-     * Fired when abort button pressed. Listened by `vaadin-upload`. Fire this
-     * event if you want to abort the file upload and remove the file from the
-     * upload file list.
+     * Fired when abort button is pressed. It is listened by `vaadin-upload` which
+     * will abort the upload in progress, but will not remove the file from the list
+     * to allow the animation to hide the element to be run.
      *
      * @event file-abort
      * @param {Object} detail
      *  @param {Object} detail.file file to abort upload of
+     */
+
+    /**
+     * Fired after the animation to hide the element has finished. It is listened
+     * by `vaadin-upload` which will actually remove the file from the upload
+     * file list.
+     *
+     * @event file-remove
+     * @param {Object} detail
+     *  @param {Object} detail.file file to remove from the  upload of
      */
   });
 

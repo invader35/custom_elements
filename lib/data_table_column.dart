@@ -60,6 +60,12 @@ class DataTableColumn extends HtmlElement with CustomElementProxyMixin, PolymerB
   get template => jsElement[r'template'];
   set template(value) { jsElement[r'template'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
+  get templatizeHeader => jsElement[r'templatizeHeader'];
+  set templatizeHeader(value) { jsElement[r'templatizeHeader'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
+  get templatizeRow => jsElement[r'templatizeRow'];
+  set templatizeRow(value) { jsElement[r'templatizeRow'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
   /// Minimum width of the column
   String get width => jsElement[r'width'];
   set width(String value) { jsElement[r'width'] = value; }

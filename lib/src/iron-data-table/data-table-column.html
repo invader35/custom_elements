@@ -2,17 +2,10 @@
 
 <dom-module id="data-table-column">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-
     <template id="header">
-      <data-table-column-filter label="[[column.name]]" value="{{column.filterValue}}" hidden="[[!column.filterBy]]"></data-table-column-filter>
-      <div hidden="[[column.filterBy]]">[[column.name]]</div>
+      <data-table-column-filter label="[[column.name]]" value="{{column.filterValue}}" hidden$="[[!column.filterBy]]"></data-table-column-filter>
+      <div hidden$="[[column.filterBy]]">[[column.name]]</div>
     </template>
-
   </template>
   <script>
     Polymer({
@@ -44,18 +37,13 @@
          * Path to a property that will be filtered by this column. If set, a filter input
          * will be automaticelly placed on the header cell of the column.
          */
-        filterBy: {
-          type: String
-        },
+        filterBy: String,
 
         /**
          * Filter value that will be used to filter the items using the property defined
          * in `filterBy` property.
          */
-        filterValue: {
-          type: String,
-          notify: true
-        },
+        filterValue: String,
 
         /**
          * Minimum width of the column
@@ -141,23 +129,99 @@
           value: function() {
             return {};
           }
+        },
+
+        templatizeRow: {
+          type: Object,
+          notify: true,
+          value: function() {
+           return function(parentElement) {
+             return this._templatize(this.template, parentElement);
+           }.bind(this)
+          }
+        },
+
+        templatizeHeader: {
+          type: Object,
+          notify: true,
+          value: function() {
+           return function(parentElement) {
+             return this._templatize(this.headerTemplate, parentElement);
+           }.bind(this);
+          }
         }
       },
 
       observers: ['_forwardedParentPropsChanged(_forwardedParentProps.*)',
-        '_templateInstancesChanged(_templateInstances.splices)'
+        '_templateInstancesChanged(_templateInstances.splices)',
+        '_filterValueChanged(filterValue, filterBy)',
+        '_filterByChanged(filterBy)',
+        '_nameChanged(name)',
+        '_sortByChanged(sortBy)'
       ],
 
+      _nameChanged: function(name) {
+        this._updateTemplateProperty('column.name', name);
+      },
+
+      _sortByChanged: function(sortBy) {
+        // column.sortBy is currently used iron-data-table so we need to notify
+        // it for changes.
+        var table = Polymer.dom(this).parentNode;
+        if (table.columns) {
+          var index = table.columns.indexOf(this);
+          table.notifyPath('columns.' + index + '.sortBy', sortBy);
+        }
+
+        // someone might be binding to sortBy in the header template so let's
+        // update that just in case.
+        this._updateTemplateProperty('column.sortBy', sortBy);
+      },
+
+      _filterByChanged: function(filterBy) {
+        this._updateTemplateProperty('column.filterBy', filterBy);
+      },
+
+      _filterValueChanged: function(filterValue, filterBy) {
+        this._updateTemplateProperty('column.filterValue', filterValue);
+        this.fire('column-filter-changed', {value: filterValue, filterBy: filterBy});
+      },
+
       _forwardParentProp: function(prop, value) {
-        this.set('_forwardedParentProps.' + prop, value);
+        //TODO: Bug in Templatizer forwards also [[item]] etc. instance properties
+        // through this function when Shadow DOM is on AND iron-data-table is nested inside
+        // another Polymer element. Inside a dom-bind template everything seems to work...
+        if (prop.indexOf('item') === -1 &&
+            prop.indexOf('selected') === -1 &&
+            prop.indexOf('index') === -1 &&
+            prop.indexOf('column') === -1 &&
+            prop.indexOf('expanded') === -1) {
+          this.set('_forwardedParentProps.' + prop, value);
+        }
+      },
+
+      _updateTemplateProperty: function(prop, value) {
+        if (this._templateInstances) {
+          var changeRecord = {base: {}};
+          changeRecord.base[prop] = value;
+          this._forwardedParentPropsChanged(changeRecord);
+        }
       },
 
       _forwardedParentPropsChanged: function(changeRecord) {
         // TODO: need to make sure this works with nested paths also. [[foo.bar]] etc.
         for (var prop in changeRecord.base) {
           this._templateInstances.forEach(function(t) {
-            t[prop] = changeRecord.base[prop];
+            t.set(prop, changeRecord.base[prop]);
           });
+        }
+      },
+
+      _forwardInstanceProp: function(inst, prop, value) {
+        if (prop === 'expanded' && inst.item && inst.__expanded__ !== value) {
+          var table = Polymer.dom(this).parentNode;
+
+          table.fire(value ? 'item-expanded' : 'item-collapsed', {item: inst.item});
         }
       },
 
@@ -166,8 +230,8 @@
         if (path.indexOf('column') === 0) {
           return;
         }
-
-        var columns = Polymer.dom(this).parentNode.columns;
+        var table = Polymer.dom(this).parentNode;
+        var columns = table.columns;
 
         for (var c = 0; c < columns.length; c++) {
           var instances = columns[c]._templateInstances;
@@ -178,6 +242,15 @@
               instance.notifyPath(path, value);
             }
           }
+        }
+
+        if (path.indexOf('item') === 0) {
+          // instance.notifyPath above will call _forwardInstancePath recursively,
+          // so need to debounce to avoid firing the same event multiple times.
+          table.debounce('item-changed', function() {
+            // stripping 'item.' from path.
+            table.fire('item-changed', {item: inst.item, path: path.substring(5), value: value});
+          }.bind(this));
         }
       },
 
@@ -203,11 +276,32 @@
           item: true,
           index: true,
           selected: true,
-          column: true
+          column: true,
+          expanded: true
         };
 
         this.templatize(this.headerTemplate);
-        this.templatize(this.template);
+
+        // template not present in angular 2 at this point.
+        if (this.template) {
+          this.templatize(this.template);
+        }
+      },
+
+      _templatize: function(template, parentElement) {
+        this.templatize(template);
+        var instance = this.stamp();
+
+        this.push('_templateInstances', instance);
+        Polymer.dom(parentElement).insertBefore(instance.root, Polymer.dom(parentElement).firstElementChild);
+
+        return {
+          bind: function(data) {
+            for (var prop in data) {
+              instance[prop] = data[prop];
+            }
+          }
+        };
       }
     });
   </script>

@@ -1,69 +1,86 @@
 <dom-module id="data-table-cell">
   <template>
+    <style is="custom-style">
+      :host {
+        flex: 1 0 100px;
+        padding: 0 24px 0 24px;
+        min-height: 10px; /* Prevent iron-list from looping when item height is really small */
+        height: 48px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        transition: flex-basis 200ms, flex-grow 200ms;
+      }
+
+      :host([header]) {
+        height: 56px;
+      }
+
+      :host([hidden]) {
+        display: none;
+      }
+    </style>
     <content></content>
   </template>
   <script>
-    window.Polymer = window.Polymer || {};
-    Polymer.IronDataTable = Polymer.IronDataTable || {};
-    Polymer.IronDataTable.cell = Polymer.IronDataTable.cell || 0;
-
     Polymer({
       is: 'data-table-cell',
 
       properties: {
-        template: {
-          type: Object
-        },
-
-        bind: {
-          type: Object
-        },
+        bind: Object,
+        order: Number,
+        header: Boolean,
+        width: String,
+        flex: Number,
 
         column: {
           type: Object,
           observer: '_columnChanged'
         },
 
-        _instance: {
+        beforeBind: {
           type: Object,
-          computed: '_templatize(column, template)'
+          value: function() {
+            return function(data, cell) {};
+          }
         },
 
-        order: Number,
-        width: String,
+        _instance: {
+          type: Object,
+          computed: '_templatize(column, _templatizer)'
+        },
 
-        _contentElement: Object,
-        _content: Object
+        _templatizer: Object
       },
 
-      observers: ['_bindData(_instance, bind)', '_render(_content, _instance)'],
+      observers: ['_bindData(_instance, bind)'],
 
       attached: function() {
-        var id = Polymer.IronDataTable.cell++;
+        if (!Polymer.Settings.useNativeShadow) {
+          // cell is supposed to be placed outside the local dom of iron-data-table.
+          Polymer.StyleTransformer.dom(this, 'iron-data-table', this._scopeCssViaAttr, true);
+          if (this.domHost) {
+            Polymer.StyleTransformer.dom(this, this.domHost.tagName.toLowerCase(), this._scopeCssViaAttr, false);
+          }
+        }
 
-        this._contentElement = document.createElement('content');
-        this._contentElement.setAttribute('select', '#cell' + id);
+        // in some cases the _columnChanged observer is run before the cell has
+        // been turned into a html element and the inline styles don't get applied.
+        // Applying them after attaching fixes makes sure they're applied.
+        this._setColumnStyleProperties(this.column);
 
-        this._content = document.createElement('div');
-        this._content.id = 'cell' + id;
-
-        Polymer.dom(this).insertBefore(this._contentElement, Polymer.dom(this).firstChild);
-        Polymer.dom(this.domHost).appendChild(this._content);
-        Polymer.dom.flush();
+        // TODO: for some reason this needs to be done async to work with Shadow
+        // DOM. Left the sync call there also to prevent flickering with Shady DOM.
+        this.async(function() {
+          this._setColumnStyleProperties(this.column);
+        });
       },
 
-      detached: function() {
-        // Polymer.dom(this._content.parentElement) has different childs depending if Shady or native Shadow DOM is used.
-        // TODO: see if there's a need to use Polymer.dom here and can it be done somehow.
-
-        if (this._content.parentElement) {
-          this._content.parentElement.removeChild(this._content);
-        }
-
-        if (this._contentElement.parentElement) {
-          Polymer.dom(this).removeChild(this._contentElement);
-          Polymer.dom.flush();
-        }
+      _setColumnStyleProperties: function(column) {
+        this.style.flexGrow = column.flex;
+        this.style.flexDirection = column.alignRight ? 'row-reverse' : 'row';
+        this.style.flexBasis = column.width;
+        this.style.flexGrow = column.flex;
       },
 
       _orderChanged: function(e) {
@@ -72,8 +89,6 @@
 
       _widthChanged: function(e) {
         this.style.flexBasis = e.detail.value;
-
-        this.domHost.notifyResize();
       },
 
       _flexChanged: function(e) {
@@ -84,40 +99,52 @@
         this.hidden = e.detail.value;
       },
 
-      _templatize: function(column, template) {
-        column.templatize(template);
-        var instance = column.stamp();
-        column.push('_templateInstances', instance);
-
-        return instance;
-      },
-
-      _bindData: function(instance, data) {
-        for (var prop in data) {
-          instance[prop] = data[prop];
+      _templatizeRowChanged: function(e) {
+        if (!this.header) {
+          this._templatizer = e.detail.value;
         }
       },
 
+      _templatizeHeaderChanged: function(e) {
+        if (this.header) {
+          this._templatizer = e.detail.value;
+        }
+      },
+
+      _templatize: function(column, templatizer) {
+        return templatizer.bind(column)(this);
+      },
+
+      _bindData: function(instance, data) {
+        if (!this.header) {
+          this.beforeBind(data, this);
+        }
+        instance.bind(data);
+      },
+
       _columnChanged: function(column, oldColumn) {
-        this.style.flexDirection = column.alignRight ? 'row-reverse' : 'row';
+        this._setColumnStyleProperties(column);
 
-        this.style.flexBasis = column.width;
         this._addListener(column, oldColumn, 'width');
-
-        this.style.flexGrow = column.flex;
         this._addListener(column, oldColumn, 'flex');
-
-        this.style.order = column.order;
         this._addListener(column, oldColumn, 'order');
 
         this.hidden = column.hidden;
         this._addListener(column, oldColumn, 'hidden');
+
+        if (this.header && column.templatizeHeader) {
+          this._templatizer = column.templatizeHeader;
+        } else if (column.templatizeRow) {
+          this._templatizer = column.templatizeRow;
+        }
+        this._addListener(column, oldColumn, 'templatizeRow');
+        this._addListener(column, oldColumn, 'templatizeHeader');
       },
 
       // Adding listeners manually *seems* to work better with forwarded parent props
       // than normal data-binding. Something to do with notifying the paths correctly.
       _addListener: function(column, oldColumn, prop) {
-        var eventName = prop + '-changed';
+        var eventName = Polymer.CaseMap.camelToDashCase(prop) + '-changed';
         var observerName = '_' + prop + 'Changed';
 
         if (oldColumn) {
@@ -125,13 +152,6 @@
         }
 
         this.listen(column, eventName, observerName);
-      },
-
-      _render: function(content, instance) {
-        content.innerHTML = '';
-
-        Polymer.dom(content).appendChild(instance.root);
-        Polymer.dom.flush();
       }
     });
   </script>
