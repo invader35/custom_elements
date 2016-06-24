@@ -1,3 +1,7 @@
+##  0.0.8
+
+ - update to latest versions of components
+
 ##  0.0.7+2
 
  - clean up 
