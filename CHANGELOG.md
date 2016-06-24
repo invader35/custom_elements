@@ -1,6 +1,7 @@
 ##  0.0.8
 
  - update to latest versions of components
+ - requires lates `polymer_elements`
 
 ##  0.0.7+2
 
