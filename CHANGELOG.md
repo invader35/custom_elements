@@ -1,7 +1,7 @@
-##  0.0.8
+##  0.0.8+2
 
- - update to latest versions of components
- - requires lates `polymer_elements`
+ - update to latest versions of components (most notably `iron-data-table` v1.0.0)
+ - requires latest `polymer_elements`
 
 ##  0.0.7+2
 
