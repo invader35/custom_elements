@@ -84,6 +84,7 @@ files_to_generate:
       - package:polymer_elements/iron_resizable_behavior.dart
   - paper-datatable/datatable-icons.html
   - iron-data-table/data-table-cell.html
+  - iron-data-table/data-table-icons.html
   - iron-data-table/data-table-templatizer-behavior.html
   - iron-data-table/data-table-column-filter.html  
   - iron-data-table/data-table-column-sort.html  
