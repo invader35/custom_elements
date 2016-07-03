@@ -83,9 +83,16 @@ files_to_generate:
      extra_imports:
       - package:polymer_elements/iron_resizable_behavior.dart
   - paper-datatable/datatable-icons.html
-  - iron-data-table/data-table-cell.html
+  - iron-data-table/data-table-cell.html:
+     omit_imports:
+        - templatizer.html
+        - templatizer-behavior.html
+     extra_imports:
+        - "data_table_templatizer_behavior.dart' as saulis; //"
   - iron-data-table/data-table-icons.html
-  - iron-data-table/data-table-templatizer-behavior.html
+  - iron-data-table/data-table-templatizer-behavior.html:
+     omit_imports:
+        - templatizer.html
   - iron-data-table/data-table-column-filter.html  
   - iron-data-table/data-table-column-sort.html  
   - iron-data-table/data-table-checkbox.html  
@@ -102,6 +109,9 @@ files_to_generate:
   - iron-data-table/data-table-row-detail.html:
      omit_imports:
         - templatizer.html
+        - templatizer-behavior.html
+     extra_imports:
+        - "data_table_templatizer_behavior.dart' as saulis; //"
   - iron-data-table/data-table-row.html
 #lib/src/iron-data-table/default-styles.html
 

@@ -28,4 +28,6 @@ upgrade versions on `bower.json` and run :
     pub run custom_element_apigen:update custom_elements_config.yaml
    
 
+## Reminder:
 
+Need to patch `apigen` too allow behavior with custom "prefix"  (prefix to be ignored) and correct handling of proxy with more than one level of indentation (`neon-animation` stuff).

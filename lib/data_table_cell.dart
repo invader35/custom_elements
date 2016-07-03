@@ -8,8 +8,7 @@ import 'dart:html';
 import 'dart:js' show JsArray, JsObject;
 import 'package:web_components/web_components.dart';
 import 'package:polymer_interop/polymer_interop.dart';
-import 'data_table_templatizer_behavior.dart' as saulis;
-import 'package:polymer_interop/src/js/debug/src/lib/template/templatizer.dart';
+import 'data_table_templatizer_behavior.dart' as saulis; //';
 
 
 @CustomElementProxy('data-table-cell')

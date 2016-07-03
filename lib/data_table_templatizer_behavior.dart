@@ -8,8 +8,6 @@ import 'dart:html';
 import 'dart:js' show JsArray, JsObject;
 import 'package:web_components/web_components.dart';
 import 'package:polymer_interop/polymer_interop.dart';
-import 'package:polymer_interop/src/js/debug/src/lib/template/templatizer.dart';
-import 'data_table_templatizer_behavior.dart';
 
 
 @BehaviorProxy(const ['Polymer', 'saulis.DataTableTemplatizerBehaviorImpl'])
@@ -38,5 +36,5 @@ abstract class DataTableTemplatizerBehaviorImpl implements CustomElementProxyMix
 
 
 @BehaviorProxy(const ['Polymer', 'saulis.DataTableTemplatizerBehavior'])
-abstract class DataTableTemplatizerBehavior implements CustomElementProxyMixin, Templatizer, saulis.DataTableTemplatizerBehaviorImpl {
+abstract class DataTableTemplatizerBehavior implements CustomElementProxyMixin, Templatizer, DataTableTemplatizerBehaviorImpl {
 }
