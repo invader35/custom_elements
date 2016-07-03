@@ -12,7 +12,7 @@ import 'data_table_column_filter.dart';
 
 
 @CustomElementProxy('data-table-column')
-class DataTableColumn extends HtmlElement with CustomElementProxyMixin, PolymerBase, Templatizer {
+class DataTableColumn extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   DataTableColumn.created() : super.created();
   factory DataTableColumn() => new Element.tag('data-table-column');
 
@@ -56,15 +56,13 @@ class DataTableColumn extends HtmlElement with CustomElementProxyMixin, PolymerB
   String get sortBy => jsElement[r'sortBy'];
   set sortBy(String value) { jsElement[r'sortBy'] = value; }
 
+  /// Reference to the parent <iron-data-table> element.
+  get table => jsElement[r'table'];
+  set table(value) { jsElement[r'table'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
   /// Template for the row item cell
   get template => jsElement[r'template'];
   set template(value) { jsElement[r'template'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
-  get templatizeHeader => jsElement[r'templatizeHeader'];
-  set templatizeHeader(value) { jsElement[r'templatizeHeader'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
-  get templatizeRow => jsElement[r'templatizeRow'];
-  set templatizeRow(value) { jsElement[r'templatizeRow'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
   /// Minimum width of the column
   String get width => jsElement[r'width'];

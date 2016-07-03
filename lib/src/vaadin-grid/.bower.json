@@ -1,15 +1,20 @@
 {
   "name": "vaadin-grid",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "authors": [
     "Vaadin Ltd"
   ],
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "keywords": [
     "web-components",
     "vaadin",
     "vaadin elements",
-    "grid"
+    "grid",
+    "table",
+    "datagrid",
+    "datatable",
+    "data-grid",
+    "data-table"
   ],
   "main": "vaadin-grid.html",
   "ignore": [
@@ -27,18 +32,18 @@
     "polymer": "Polymer/polymer#^1.1.1"
   },
   "devDependencies": {
-    "web-component-tester": "~3.3.21",
+    "web-component-tester": "4.0.3",
     "iron-test-helpers": "polymerelements/iron-test-helpers#~1.0.6",
     "test-fixture": "polymerelements/test-fixture#~1.0.1",
     "iron-component-page": "polymerelements/iron-component-page#~1.1.0",
     "elements-demo-resources": "vaadin/elements-demo-resources#master"
   },
   "homepage": "https://github.com/vaadin/vaadin-grid",
-  "_release": "1.0.1",
+  "_release": "1.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.1",
-    "commit": "49c46412e87087d9725091cf3740dd574ac2bc26"
+    "tag": "v1.1.0",
+    "commit": "157c7e050888e9e81306664bf47e83e9f0f7edd1"
   },
   "_source": "https://github.com/vaadin/vaadin-grid.git",
   "_target": "*",

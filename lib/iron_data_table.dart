@@ -98,7 +98,7 @@ class IronDataTable extends HtmlElement with CustomElementProxyMixin, PolymerBas
   IronDataTable.created() : super.created();
   factory IronDataTable() => new Element.tag('iron-data-table');
 
-  /// A function that is called before data is bound to a row cell.
+  /// A function that is called before data is bound to a row or header cell.
   /// Can be used to customize the cell element depending on the data.
   /// #### Example:
   /// ```js
@@ -108,6 +108,17 @@ class IronDataTable extends HtmlElement with CustomElementProxyMixin, PolymerBas
   /// ```
   get beforeCellBind => jsElement[r'beforeCellBind'];
   set beforeCellBind(value) { jsElement[r'beforeCellBind'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
+  /// A function that is called before data is bound to a row details element.
+  /// Can be used to customize the element depending on the data.
+  /// #### Example:
+  /// ```js
+  /// function(data, details) {
+  ///   details.toggleClass('custom', data.useCustomClass);
+  /// }
+  /// ```
+  get beforeDetailsBind => jsElement[r'beforeDetailsBind'];
+  set beforeDetailsBind(value) { jsElement[r'beforeDetailsBind'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
   /// A function that is called before data is bound to a row.
   /// Can be used to customize the row element depending on the data.

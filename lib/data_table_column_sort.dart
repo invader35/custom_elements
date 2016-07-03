@@ -8,8 +8,8 @@ import 'dart:html';
 import 'dart:js' show JsArray, JsObject;
 import 'package:web_components/web_components.dart';
 import 'package:polymer_interop/polymer_interop.dart';
-import 'package:polymer_elements/iron_icons.dart';
 import 'package:polymer_elements/paper_icon_button.dart';
+import 'data_table_icons.dart';
 
 
 @CustomElementProxy('data-table-column-sort')

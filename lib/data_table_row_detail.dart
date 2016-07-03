@@ -8,16 +8,14 @@ import 'dart:html';
 import 'dart:js' show JsArray, JsObject;
 import 'package:web_components/web_components.dart';
 import 'package:polymer_interop/polymer_interop.dart';
+import 'data_table_templatizer_behavior.dart';
 
 
 @CustomElementProxy('data-table-row-detail')
-class DataTableRowDetail extends HtmlElement with CustomElementProxyMixin, PolymerBase, Templatizer {
+class DataTableRowDetail extends HtmlElement with CustomElementProxyMixin, PolymerBase, Templatizer, saulis.DataTableTemplatizerBehaviorImpl, saulis.DataTableTemplatizerBehavior {
   DataTableRowDetail.created() : super.created();
   factory DataTableRowDetail() => new Element.tag('data-table-row-detail');
 
-  get bind => jsElement[r'bind'];
-  set bind(value) { jsElement[r'bind'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
-  get rowDetailTemplate => jsElement[r'rowDetailTemplate'];
-  set rowDetailTemplate(value) { jsElement[r'rowDetailTemplate'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+  get beforeBind => jsElement[r'beforeBind'];
+  set beforeBind(value) { jsElement[r'beforeBind'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 }

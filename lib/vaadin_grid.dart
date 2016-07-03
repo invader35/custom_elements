@@ -45,12 +45,12 @@ import 'package:polymer_interop/polymer_interop.dart';
 ///
 /// ### Styling
 ///
-/// The grid uses `--default-primary-color` from [paper-styles](https://github.com/PolymerElements/paper-styles) as a highlight color. You can customize the color by defining your own primary default color.
+/// The grid uses `--primary-color` from [paper-styles](https://github.com/PolymerElements/paper-styles) as a highlight color. You can customize the color by defining your own primary default color.
 ///
 /// ```html
 /// <style is="custom-style">
 ///   vaadin-grid {
-///     --default-primary-color: red;
+///     --primary-color: red;
 ///   }
 /// </style>
 /// ```
@@ -61,28 +61,15 @@ import 'package:polymer_interop/polymer_interop.dart';
 /// `--vaadin-grid-row-height` | Data row height | `48px`
 /// `--vaadin-grid-header-row-height` | Header row height | `56px`
 /// `--vaadin-grid-footer-row-height` | Footer row height | `56px`
+/// `--vaadin-grid-selected-row-cell` | Mixin which applies to the cell elements of a selected row | {}
+/// '--vaadin-grid-row-cell' | Mixin which applies to the cell elements of the table | {}
+///
 ///
 /// See the [demo](demo/index.html) for use case examples.
 @CustomElementProxy('vaadin-grid')
 class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   VaadinGrid.created() : super.created();
   factory VaadinGrid() => new Element.tag('vaadin-grid');
-
-  /// A function which is used for generating CSS class names for data cells.
-  ///
-  /// See the API documentation for the “cell” object for more details about
-  /// the parameter of this function.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.cellClassGenerator = function(cell) {
-  ///   if (cell.index == 2) {
-  ///      return "activity-" + cell.data.toLowerCase();
-  ///    }
-  ///  };
-  /// ```
-  get cellClassGenerator => jsElement[r'cellClassGenerator'];
-  set cellClassGenerator(value) { jsElement[r'cellClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
   /// The array of columns attached to the grid.
   ///
@@ -165,35 +152,6 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   get items => jsElement[r'items'];
   set items(value) { jsElement[r'items'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
-  /// A function which is used for generating CSS class names for data rows.
-  ///
-  /// See the API documentation for the “row” object for more details about
-  /// the parameter of this function.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.rowClassGenerator = function(row) {
-  ///   var activity = row.data[2];
-  ///   return "activity-" + activity.toLowerCase();
-  /// };
-  /// ```
-  get rowClassGenerator => jsElement[r'rowClassGenerator'];
-  set rowClassGenerator(value) { jsElement[r'rowClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
-  /// The row details generator is used for generating detail content for
-  /// data rows. The details element is added directly under the row.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.rowDetails.detailsGenerator = function(rowIndex) {
-  ///   var detail = document.createElement("div");
-  ///   detail.textContent = "Row detail content for row " + rowIndex;
-  ///   return detail;
-  /// };
-  /// ```
-  get rowDetailsGenerator => jsElement[r'rowDetailsGenerator'];
-  set rowDetailsGenerator(value) { jsElement[r'rowDetailsGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
   /// Object for controlling and accessing the selected rows in the grid.
   ///
   /// See the API documentation for the “selection” object for more details.
@@ -221,7 +179,7 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   ///
   /// #### Declarative example:
   /// ```html
-  /// <vaadin-grid rows="5">...</vaadin-grid>
+  /// <vaadin-grid visible-rows="5">...</vaadin-grid>
   /// ```
   num get visibleRows => jsElement[r'visibleRows'];
   set visibleRows(num value) { jsElement[r'visibleRows'] = value; }
@@ -231,6 +189,22 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   /// [beforeColumn]: Index or id of the column before which the new column should be added.
   addColumn(column, String beforeColumn) =>
       jsElement.callMethod('addColumn', [column, beforeColumn]);
+
+  /// A function which is used for generating CSS class names for data cells.
+  ///
+  /// See the API documentation for the “cell” object for more details about
+  /// the parameter of this function.
+  ///
+  /// #### Example:
+  /// ```js
+  /// grid.cellClassGenerator = function(cell) {
+  ///   if (cell.index == 2) {
+  ///      return "activity-" + cell.data.toLowerCase();
+  ///    }
+  ///  };
+  /// ```
+  cellClassGenerator() =>
+      jsElement.callMethod('cellClassGenerator', []);
 
   /// Invokes the callback with row data of the provided row index as the
   /// parameter. If the row is not cached, it's fetched from the data source
@@ -243,7 +217,7 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
 
   /// Clears the grid’s internal data cache, causing it to request the
   /// visible items in the grid viewport from the `items` property or the
-  /// `datasource` function, and to scroll back to the top of the grid viewport.
+  /// `datasource` function.
   ///
   /// Needs to be called whenever the data items are modified in some way
   /// (added, removed, updated, re-ordered etc.).
@@ -254,6 +228,35 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   /// [id]: Column to be removed.
   removeColumn(String id) =>
       jsElement.callMethod('removeColumn', [id]);
+
+  /// A function which is used for generating CSS class names for data rows.
+  ///
+  /// See the API documentation for the “row” object for more details about
+  /// the parameter of this function.
+  ///
+  /// #### Example:
+  /// ```js
+  /// grid.rowClassGenerator = function(row) {
+  ///   var activity = row.data[2];
+  ///   return "activity-" + activity.toLowerCase();
+  /// };
+  /// ```
+  rowClassGenerator() =>
+      jsElement.callMethod('rowClassGenerator', []);
+
+  /// The row details generator is used for generating detail content for
+  /// data rows. The details element is added directly under the row.
+  ///
+  /// #### Example:
+  /// ```js
+  /// grid.rowDetailsGenerator = function(rowIndex) {
+  ///   var detail = document.createElement("div");
+  ///   detail.textContent = "Row detail content for row " + rowIndex;
+  ///   return detail;
+  /// };
+  /// ```
+  rowDetailsGenerator() =>
+      jsElement.callMethod('rowDetailsGenerator', []);
 
   /// Scrolls to the end of the grid.
   ///

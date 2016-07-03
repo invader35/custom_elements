@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {
     "paper-datatable": "*",
-    "iron-data-table" : "iron-data-table#master",
+    "iron-data-table" : "iron-data-table#1.0.0-rc1",
     "polymer-paper-date-picker": "*",
     "paper-time-picker": "*",
     "paper-chip":"*",
