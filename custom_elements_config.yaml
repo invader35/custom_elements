@@ -112,6 +112,10 @@ stubs_to_generate:
   - paper-tooltip/paper-tooltip.html
   - iron-resizable-behavior/iron-resizable-behavior.html
   - iron-list/iron-list.html
+  - paper-spinner/paper-spinner.html
+  - paper-spinner/paper-spinner-behavior.html
+  - paper-spinner/paper-spinner-lite.html
+  - paper-spinner/paper-spinner-styles.html
   - paper-input/paper-input.html
   - iron-icon/iron-icon.html
   - iron-icons/iron-icons.html
