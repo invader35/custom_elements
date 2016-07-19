@@ -168,6 +168,35 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   get items => jsElement[r'items'];
   set items(value) { jsElement[r'items'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
+  /// A function which is used for generating CSS class names for data rows.
+  ///
+  /// See the API documentation for the “row” object for more details about
+  /// the parameter of this function.
+  ///
+  /// #### Example:
+  /// ```js
+  /// grid.rowClassGenerator = function(row) {
+  ///   var activity = row.data[2];
+  ///   return "activity-" + activity.toLowerCase();
+  /// };
+  /// ```
+  get rowClassGenerator => jsElement[r'rowClassGenerator'];
+  set rowClassGenerator(value) { jsElement[r'rowClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
+  /// The row details generator is used for generating detail content for
+  /// data rows. The details element is added directly under the row.
+  ///
+  /// #### Example:
+  /// ```js
+  /// grid.rowDetailsGenerator = function(rowIndex) {
+  ///   var detail = document.createElement("div");
+  ///   detail.textContent = "Row detail content for row " + rowIndex;
+  ///   return detail;
+  /// };
+  /// ```
+  get rowDetailsGenerator => jsElement[r'rowDetailsGenerator'];
+  set rowDetailsGenerator(value) { jsElement[r'rowDetailsGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
   /// Object for controlling and accessing the selected rows in the grid.
   ///
   /// See the API documentation for the “selection” object for more details.
@@ -228,35 +257,6 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   /// [id]: Column to be removed.
   removeColumn(String id) =>
       jsElement.callMethod('removeColumn', [id]);
-
-  /// A function which is used for generating CSS class names for data rows.
-  ///
-  /// See the API documentation for the “row” object for more details about
-  /// the parameter of this function.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.rowClassGenerator = function(row) {
-  ///   var activity = row.data[2];
-  ///   return "activity-" + activity.toLowerCase();
-  /// };
-  /// ```
-  rowClassGenerator() =>
-      jsElement.callMethod('rowClassGenerator', []);
-
-  /// The row details generator is used for generating detail content for
-  /// data rows. The details element is added directly under the row.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.rowDetailsGenerator = function(rowIndex) {
-  ///   var detail = document.createElement("div");
-  ///   detail.textContent = "Row detail content for row " + rowIndex;
-  ///   return detail;
-  /// };
-  /// ```
-  rowDetailsGenerator() =>
-      jsElement.callMethod('rowDetailsGenerator', []);
 
   /// Scrolls to the end of the grid.
   ///
