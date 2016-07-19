@@ -71,6 +71,22 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   VaadinGrid.created() : super.created();
   factory VaadinGrid() => new Element.tag('vaadin-grid');
 
+  /// A function which is used for generating CSS class names for data cells.
+  ///
+  /// See the API documentation for the “cell” object for more details about
+  /// the parameter of this function.
+  ///
+  /// #### Example:
+  /// ```js
+  /// grid.cellClassGenerator = function(cell) {
+  ///   if (cell.index == 2) {
+  ///      return "activity-" + cell.data.toLowerCase();
+  ///    }
+  ///  };
+  /// ```
+  get cellClassGenerator => jsElement[r'cellClassGenerator'];
+  set cellClassGenerator(value) { jsElement[r'cellClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
   /// The array of columns attached to the grid.
   ///
   /// See the API documentation for “column” for more details about the
@@ -189,22 +205,6 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   /// [beforeColumn]: Index or id of the column before which the new column should be added.
   addColumn(column, String beforeColumn) =>
       jsElement.callMethod('addColumn', [column, beforeColumn]);
-
-  /// A function which is used for generating CSS class names for data cells.
-  ///
-  /// See the API documentation for the “cell” object for more details about
-  /// the parameter of this function.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.cellClassGenerator = function(cell) {
-  ///   if (cell.index == 2) {
-  ///      return "activity-" + cell.data.toLowerCase();
-  ///    }
-  ///  };
-  /// ```
-  cellClassGenerator() =>
-      jsElement.callMethod('cellClassGenerator', []);
 
   /// Invokes the callback with row data of the provided row index as the
   /// parameter. If the row is not cached, it's fetched from the data source
