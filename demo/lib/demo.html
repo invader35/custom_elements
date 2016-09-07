@@ -65,22 +65,14 @@
                         <data-table-column name="Title" sort-by="title" flex="1" filter-by="title">
                             <template>[[item.title]]</template>
                         </data-table-column>
-                        <template is="dom-repeat" items="[[cols]]" as="col">
-                            <data-table-column name="[[col]]" sort-by="title" flex="1" filter-by="title">
-                                <template>
-                                    <span>[[contentOf(item,col)]]</span>
-                                </template>
-                            </data-table-column>
-                        </template>
                     </iron-data-table>
 
                     <b> vaadin grid </b>
                     <vaadin-grid items="[[myData]]" selection-mode="multi" frozen-columns="1">
                         <table>
                             <colgroup>
-                                <template is="dom-repeat" items="[[cols]]" as="col">
-                                    <col name="[[col]]">
-                                </template>
+				<col name='page'>
+				<col name='title'>
                             </colgroup>
                         </table>
                     </vaadin-grid>

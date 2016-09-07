@@ -11,10 +11,10 @@ import 'package:polymer_interop/polymer_interop.dart';
 import 'package:polymer_elements/iron_resizable_behavior.dart';
 import 'package:polymer_elements/iron_flex_layout.dart';
 import 'package:polymer_elements/iron_icon.dart';
-import 'package:polymer_elements/iron_icons.dart';
 import 'package:polymer_elements/paper_ripple.dart';
-import 'package:polymer_elements/paper_styles.dart';
+import 'package:polymer_elements/typography.dart';
 import 'moment_with_locales_import.dart';
+import 'package:custom_elements/paper_date_picker_icons.dart';
 
 
 @CustomElementProxy('paper-calendar')

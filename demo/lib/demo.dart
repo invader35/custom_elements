@@ -54,6 +54,9 @@ class TestPolymerAutonotify extends PolymerElement {
 
   @reflectable
   String contentOf(Item item,String colName) {
+    if (item is! Item) {
+	return "null";
+    } 
     switch(colName) {
       case "page":
         return item.page;

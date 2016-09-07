@@ -3,4 +3,4 @@ packages
 .idea
 *.iml
 .pub
-./pubspec.lock
+pubspec.lock

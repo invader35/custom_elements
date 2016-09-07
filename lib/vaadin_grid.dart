@@ -71,22 +71,6 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   VaadinGrid.created() : super.created();
   factory VaadinGrid() => new Element.tag('vaadin-grid');
 
-  /// A function which is used for generating CSS class names for data cells.
-  ///
-  /// See the API documentation for the “cell” object for more details about
-  /// the parameter of this function.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.cellClassGenerator = function(cell) {
-  ///   if (cell.index == 2) {
-  ///      return "activity-" + cell.data.toLowerCase();
-  ///    }
-  ///  };
-  /// ```
-  get cellClassGenerator => jsElement[r'cellClassGenerator'];
-  set cellClassGenerator(value) { jsElement[r'cellClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
   /// The array of columns attached to the grid.
   ///
   /// See the API documentation for “column” for more details about the
@@ -168,35 +152,6 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   get items => jsElement[r'items'];
   set items(value) { jsElement[r'items'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
-  /// A function which is used for generating CSS class names for data rows.
-  ///
-  /// See the API documentation for the “row” object for more details about
-  /// the parameter of this function.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.rowClassGenerator = function(row) {
-  ///   var activity = row.data[2];
-  ///   return "activity-" + activity.toLowerCase();
-  /// };
-  /// ```
-  get rowClassGenerator => jsElement[r'rowClassGenerator'];
-  set rowClassGenerator(value) { jsElement[r'rowClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
-  /// The row details generator is used for generating detail content for
-  /// data rows. The details element is added directly under the row.
-  ///
-  /// #### Example:
-  /// ```js
-  /// grid.rowDetailsGenerator = function(rowIndex) {
-  ///   var detail = document.createElement("div");
-  ///   detail.textContent = "Row detail content for row " + rowIndex;
-  ///   return detail;
-  /// };
-  /// ```
-  get rowDetailsGenerator => jsElement[r'rowDetailsGenerator'];
-  set rowDetailsGenerator(value) { jsElement[r'rowDetailsGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
-
   /// Object for controlling and accessing the selected rows in the grid.
   ///
   /// See the API documentation for the “selection” object for more details.
@@ -235,6 +190,10 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   addColumn(column, String beforeColumn) =>
       jsElement.callMethod('addColumn', [column, beforeColumn]);
 
+  /// A function which is used for generating CSS class names for data cells.
+  get cellClassGenerator => jsElement[r'cellClassGenerator'];
+  set cellClassGenerator(value) { jsElement[r'cellClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
   /// Invokes the callback with row data of the provided row index as the
   /// parameter. If the row is not cached, it's fetched from the data source
   /// first.
@@ -257,6 +216,15 @@ class VaadinGrid extends HtmlElement with CustomElementProxyMixin, PolymerBase {
   /// [id]: Column to be removed.
   removeColumn(String id) =>
       jsElement.callMethod('removeColumn', [id]);
+
+  /// A function which is used for generating CSS class names for data rows.
+  get rowClassGenerator => jsElement[r'rowClassGenerator'];
+  set rowClassGenerator(value) { jsElement[r'rowClassGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
+
+  ///  The row details generator is used for generating detail content for
+  /// data rows. The details element is added directly under the row.
+  get rowDetailsGenerator => jsElement[r'rowDetailsGenerator'];
+  set rowDetailsGenerator(value) { jsElement[r'rowDetailsGenerator'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
   /// Scrolls to the end of the grid.
   ///

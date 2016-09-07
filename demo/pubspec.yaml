@@ -7,7 +7,7 @@ environment:
   sdk: '>=1.13.0 <2.0.0'
 dependencies:
   polymer: "^1.0.0-rc.15"
-  polymer_elements: 1.0.0-rc.7
+  polymer_elements: ^1.0.0-rc.7
   custom_elements:
     path: ..
 

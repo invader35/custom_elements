@@ -694,8 +694,8 @@ See the [demo](demo/index.html) for use case examples.
        *    }
        *  };
        * ```
-       * @property {any} cellClassGenerator
-       * @type {any}
+       * @property {function} cellClassGenerator
+       * @type {function}
        */
       cellClassGenerator: {
         type: Function,
@@ -900,8 +900,8 @@ See the [demo](demo/index.html) for use case examples.
        * };
        *```
        *
-       * @property {any} rowClassGenerator
-       * @type {any}
+       * @property {function} rowClassGenerator
+       * @type {function}
        */
       rowClassGenerator: {
         type: Function,
@@ -921,8 +921,8 @@ See the [demo](demo/index.html) for use case examples.
        * };
        *```
        *
-       * @property {any} rowDetailsGenerator
-       * @type {any}
+       * @property {function} rowDetailsGenerator
+       * @type {function}
        */
       rowDetailsGenerator: {
         type: Function,
@@ -1115,11 +1115,7 @@ See the [demo](demo/index.html) for use case examples.
       if (this.hasAttribute('selection-mode')) {
         this.selection.mode = this.getAttribute('selection-mode');
       }
-      if (this.colums) {
-        this._grid.setColumns(this.columns);
-      } else {
-        this.columns = this._grid.getColumns();
-      }
+      this.columns = this._grid.getColumns();
       this._grid.init(this, Polymer.dom(this.root), this.$.measureobject);
 
       Polymer.dom(this).observeNodes(function(info) {

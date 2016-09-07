@@ -42,12 +42,6 @@ class PaperDatatableColumn extends HtmlElement with CustomElementProxyMixin, Pol
   bool get dialog => jsElement[r'dialog'];
   set dialog(bool value) { jsElement[r'dialog'] = value; }
 
-  /// Per material design spec it's often useful to indicate that a cell is editable if you're using
-  /// `[dialog]` based editing. This will show a little pencil icon to the right of the cell, but can be
-  /// a bit overwhelming if used on more than one column.
-  bool get editIcon => jsElement[r'editIcon'];
-  set editIcon(bool value) { jsElement[r'editIcon'] = value; }
-
   /// If `type` is a simple type, then if this is true one of the default editable
   /// templates is used. For example if `type` is `String` every cell will contain
   /// a `<paper-input>`. This is practically just a convenience method so that you
@@ -57,6 +51,12 @@ class PaperDatatableColumn extends HtmlElement with CustomElementProxyMixin, Pol
   /// a selection. So if you click in a `<paper-input>` it won't select the row.
   bool get editable => jsElement[r'editable'];
   set editable(bool value) { jsElement[r'editable'] = value; }
+
+  /// Per material design spec it's often useful to indicate that a cell is editable if you're using
+  /// `[dialog]` based editing. This will show a little pencil icon to the right of the cell, but can be
+  /// a bit overwhelming if used on more than one column.
+  bool get editIcon => jsElement[r'editIcon'];
+  set editIcon(bool value) { jsElement[r'editIcon'] = value; }
 
   /// String displayed in `<th></th>`
   String get header => jsElement[r'header'];
@@ -78,14 +78,14 @@ class PaperDatatableColumn extends HtmlElement with CustomElementProxyMixin, Pol
   num get resizePriority => jsElement[r'resizePriority'];
   set resizePriority(num value) { jsElement[r'resizePriority'] = value; }
 
-  /// Whether the column is currently sorted. Should only be set on one column at a time
-  String get sortDirection => jsElement[r'sortDirection'];
-  set sortDirection(String value) { jsElement[r'sortDirection'] = value; }
-
   /// Whether to show sorting UI on the column. Sorting only works automagically
   /// on simple data types.
   bool get sortable => jsElement[r'sortable'];
   set sortable(bool value) { jsElement[r'sortable'] = value; }
+
+  /// Whether the column is currently sorted. Should only be set on one column at a time
+  String get sortDirection => jsElement[r'sortDirection'];
+  set sortDirection(String value) { jsElement[r'sortDirection'] = value; }
 
   /// Whether the column is currently sorted. Should only be set on one column at a time
   bool get sorted => jsElement[r'sorted'];

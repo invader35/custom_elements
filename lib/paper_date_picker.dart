@@ -16,7 +16,7 @@ import 'package:polymer_elements/neon_animated_pages.dart';
 import 'package:polymer_elements/neon_animatable.dart';
 import 'package:polymer_elements/iron_selector.dart';
 import 'package:polymer_elements/iron_flex_layout.dart';
-import 'package:polymer_elements/paper_styles.dart';
+import 'package:polymer_elements/typography.dart';
 import 'moment_with_locales_import.dart';
 import 'package:custom_elements/paper_calendar.dart';
 import 'package:custom_elements/paper_date_picker_dialog_style.dart';

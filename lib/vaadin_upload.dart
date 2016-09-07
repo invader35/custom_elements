@@ -9,10 +9,10 @@ import 'dart:js' show JsArray, JsObject;
 import 'package:web_components/web_components.dart';
 import 'package:polymer_interop/polymer_interop.dart';
 import 'package:polymer_elements/iron_flex_layout.dart';
-import 'package:polymer_elements/iron_icons.dart';
 import 'package:polymer_elements/typography.dart';
 import 'package:polymer_elements/paper_ripple.dart';
 import 'package:polymer_elements/paper_button.dart';
+import 'vaadin_upload_icons.dart';
 import 'vaadin_upload_file.dart';
 
 /// `<vaadin-upload>` is a Polymer element for uploading multiple files with drag and drop support.
@@ -134,17 +134,17 @@ class VaadinUpload extends HtmlElement with CustomElementProxyMixin, PolymerBase
   get i18n => jsElement[r'i18n'];
   set i18n(value) { jsElement[r'i18n'] = (value is Map || (value is Iterable && value is! JsArray)) ? new JsObject.jsify(value) : value;}
 
+  /// Limit of files to upload, by default it is unlimited. If the value is
+  /// set to one, native file browser will prevent selecting multiple files.
+  num get maxFiles => jsElement[r'maxFiles'];
+  set maxFiles(num value) { jsElement[r'maxFiles'] = value; }
+
   /// Specifies the maximum file size in bytes allowed to upload.
   /// Notice that it is a client-side constraint, which will be checked before
   /// sending the request. Obviously you need to do the same validation in
   /// the server-side and be sure that they are aligned.
   num get maxFileSize => jsElement[r'maxFileSize'];
   set maxFileSize(num value) { jsElement[r'maxFileSize'] = value; }
-
-  /// Limit of files to upload, by default it is unlimited. If the value is
-  /// set to one, native file browser will prevent selecting multiple files.
-  num get maxFiles => jsElement[r'maxFiles'];
-  set maxFiles(num value) { jsElement[r'maxFiles'] = value; }
 
   /// HTTP Method used to send the files. Only POST and PUT are allowed.
   String get method => jsElement[r'method'];
