@@ -4,6 +4,7 @@ import "dart:html";
 import "package:demo_custom_elements/demo.dart";
 
 import "package:logging/logging.dart";
+import 'package:polymer_interop/polymer_interop.dart';
 
 main() async {
 
@@ -12,5 +13,5 @@ main() async {
     print('${rec.level.name}: ${rec.time}: ${rec.loggerName} - ${rec.message}');
   });
 
-  await initPolymer();
+  await initPolymer(strategy:checkForEs6ProxySupport());
 }
